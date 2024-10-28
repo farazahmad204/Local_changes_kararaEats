@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+M. Contact us
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Contact Section -->
+<section class="contact-section">
+
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-6 mt-2">
+        <h3 class="display-4 text-center fadeInUp"><strong><span class="MainHeadline">Contact Us</span></strong></h3>
+        <p  class="text-center mb-5 custom-font text-light ">Get in touch with us!</p>
+
+        <form method="post" action="{% url 'contact_us' %}">
+          {% csrf_token %}
+          <div class="form-control no-box">
+            {{ form.username }}
+            {{ form.username.errors }}
+          </div>
+          <div class="form-control  mt-4 error">
+            {{ form.email }}
+            {{ form.email.errors }}
+          </div>
+          <div class="form-control mt-4 error">
+            {{ form.mobile }}
+            {{ form.mobile.errors }}
+          </div>
+          <div class="form-group mt-4 error">
+            <label for="id_message" class="text-white "> <span style="background-color: hsl(0, 8%, 27%); padding: 5px;">Message</span></strong></label> <!-- Optional: Add label for accessibility -->
+            {{ form.message }} 
+            {{ form.message.errors }}
+        </div>
+
+          <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </form>
+      </div>
+
+      <div class="col-lg-6 my-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success text-center">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<style>
+  .contact-section {
+    height: auto;
+    /*  background-color: rgb(245, 220, 205);
+        Remove fixed height */
+  }
+
+  .no-border {
+    border: none;
+    /* Remove the border */
+    box-shadow: none;
+    /* Remove any box shadow */
+    outline: none;
+    /* Remove outline on focus */
+  }
+
+  .custom-textarea {
+    width: 100%;
+    /* Set width to 100% of the parent */
+    height: auto;
+    /* Set height to auto or a specific value */
+    min-height: 10px;
+    /* Minimum height */
+    resize: horizontal;
+    /* Allow vertical resizing only */
+  }
+    .error {
+        color: red; /* Change this to your desired color */
+        font-weight: bold; /* Optional: make the error text bold */
+    }
+
+
+    
+
+</style>
+
+{% endblock %}

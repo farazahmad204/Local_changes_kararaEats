@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-1 animated bounceInDown">404</h1>
+    <h2 class="display-4 animated fadeInUp delay-1s">Oops! Page Not Found</h2>
+    <p class="lead mt-4 animated fadeInUp delay-2s">Sorry, but the page you're looking for doesn't exist.</p>
+    <a href="{% url 'WeeklyMenu' %}" class="btn btn-primary btn-lg mt-3 animated fadeInUp delay-3s">
+        Go Back to Home
+    </a>
+</div>
+
+<style>
+    /* Add a nice background */
+    body {
+        background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+        color: white;
+    }
+
+    .container {
+        margin-top: 100px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Keyframe animations for bounce, fade */
+    @keyframes bounceInDown {
+        0% {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        60% {
+            opacity: 1;
+            transform: translateY(30px);
+        }
+        80% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .animated.bounceInDown {
+        animation-name: bounceInDown;
+        animation-duration: 1.5s;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animated.fadeInUp {
+        animation-name: fadeInUp;
+        animation-duration: 1s;
+    }
+
+    .animated.fadeInUp.delay-1s {
+        animation-delay: 1s;
+    }
+
+    .animated.fadeInUp.delay-2s {
+        animation-delay: 2s;
+    }
+
+    .animated.fadeInUp.delay-3s {
+        animation-delay: 3s;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Weekly Menu{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+{% if user.username == 'fahm' %} 
+
+ <h2 class="display-4 text-center fadeInUp"><strong><span class="MainHeadline">Explore Our Menus</span></strong></h2>
+<p class="text-center mb-5 custom-font text-light "><strong>Select your favorite items and place an order in just a
+        few clicks! </strong> </p> 
+        {% endif %}
+        {% endif %}
+
+          <!-- ********************* Slide Show ****************************************************************************-->
+   <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="container">
+          <div id="carouselExampleCaptions" class="carousel slide " data-bs-ride="carousel">
+              <div class="carousel-indicators ">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{% static 'images/karara_eats_banner_1.png' %}" class="d-block w-100 blurred-bg" alt="...">
+                     <!-- <div class="carousel-caption d-none d-md-block text-success bg-dark">
+                  </div> -->
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'images/karara_eats_banner_1.png' %}" class="d-block w-100 blurred-bg" alt="...">
+                     <!-- <div class="carousel-caption d-none d-md-block text-success bg-dark">
+                  </div> -->
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'images/karara_eats_banner_1.png' %}" class="d-block w-100 blurred-bg" alt="...">
+                    <!-- <div class="carousel-caption d-none d-md-block text-success bg-dark">
+                  </div> -->
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                <span class="hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                <span class="hidden">Next</span>
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<div class="tabs">
+    {% for menu in menus %}
+    <button class="tab-button" onclick="showMenu('{{ menu.name }}')">
+        <span class="nav-link display-4 text-center fadeInUp custom-Tabs-font">{{ menu.name }}</span>
+    </button>
+    {% endfor %}
+</div>
+
+<form id="orderForm" method="post" action="{% url 'order_items' %}">
+    {% csrf_token %}
+   
+    <div id="menuContent" class="mt-5">
+
+
+        {% for menu in menus %}
+        <div id="{{ menu.name }}" class="menu-section" style="display: none;">
+            <input type="hidden" name="menu_id" value="{{ menu.id }}">
+            <div class="menu-items">
+                {% for item in menu.food_items.all %}
+                <div class="menu-item">
+                    <div class="card shadow-sm animated fadeIn" style="border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); height: 350px;">
+                        {% if item.picture %}
+                        <img class="img-fluid card-img-top" alt="{{ item.name }}" src="{{ item.picture.url }}" style="border-bottom: 3px solid aqua; border-radius: 15px 15px 0 0; height: 150px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body text-center" style="padding: 15px;">
+                            <p class="card-text">
+                                <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
+                                <small class="text-muted d-block" style="font-style: italic;">{{ item.description }}</small>
+                            </p>
+                            <h5 style="color: darkblue;">${{ item.price }}</h5>
+                            <div class="text-center">
+                                <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
+                                       name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
+                                       class="form-control item-quantity" value="8" placeholder="Qty" style="width: 70px; margin-top: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <hr style="border-top: 2px solid lightgray;">
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Submit button -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
+            <i class="fas fa-shopping-cart"></i> Order Selected Items
+        </button>
+    </div>
+</form>
+
+<!-- Modal for Login Prompt -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-light" id="loginModalLabel">
+                    <img src="{% static 'images/user.svg' %}" alt="user icon" class="img-thumbnail mr-3"
+                        style="width: 50px; height: 80px; object-fit: cover; border-radius: 50%;">
+                    <span> Login Required</span>
+                </h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <p class="custom-font">You need to log in to place an order. Please log in or register to continue.</p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn custom-font">Login</button>
+                </form>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for No Items Selected Prompt -->
+<div class="modal fade" id="noItemsModal" tabindex="-1" role="dialog" aria-labelledby="noItemsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-light" id="noItemsModalLabel">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span>No Items Selected</span>
+                </h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <p class="custom-font">Please select at least one item to place an order.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delivery Option Modal -->
+<div class="modal fade" id="DeliveryModal" tabindex="-1" aria-labelledby="DeliveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title animated fadeIn text-light" id="DeliveryModalLabel"><i
+                        class="fa-solid fa-car"></i> Delivery Option</h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body text-center">
+                <hr>
+                <form method="post" action="{% url 'confirm_order' %}" class="animated fadeInUp">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-check animated fadeIn">
+                            <input type="radio" id="self_pickup" name="delivery_option" value="self_pickup"
+                                class="form-check-input" checked>
+                            <label for="self_pickup" class="form-check-label">Self-Pickup</label>
+                        </div>
+                        <div class="form-check animated fadeIn mt-2">
+                            <input type="radio" id="home_delivery" name="delivery_option" value="home_delivery"
+                                class="form-check-input">
+                            <label for="home_delivery" class="form-check-label">Home Delivery</label>
+                        </div>
+                        <br>
+                        <hr>
+                        <p class="text-center custom-font animated fadeInup fa-solid">Delivery Fee applied if total is
+                            below $50</p>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="confirm_order" id="confirmBtn" class="logout-btn custom-font">Confirm
+                    Order</button>
+                <button type="button" class="logout-btn custom-font" id="cancelBtn"
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .menu-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .menu-item {
+        flex: 0 1 30%;
+        /* Adjust the width of each item */
+        margin: 15px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .card {
+        width: 100%;
+        /* Ensures the card takes full width of the menu-item */
+        height: 100%;
+        /* Makes the card the full height of the menu-item */
+    }
+
+    .card img {
+        height: 150px;
+        /* Fixed height for the image */
+        object-fit: cover;
+        /* Ensures the image covers the space without distortion */
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Ensures consistent spacing in the card body */
+    }
+
+    .card {
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal styles */
+    .modal-dialog {
+        display: flex;
+        align-items: center;
+        min-height: calc(100vh - 10rem);
+        margin-left: 40%;
+        margin-top: 50px;
+    }
+
+    .modal-dialog .modal-content {
+        background-color: rgb(221, 219, 219);
+    }
+
+    /* Form check styles */
+    .form-check {
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-Tabs-font {
+        font-family: 'Poppins', Cursive, Monospace, Fantasy, Sans-serif, Serif;
+        font-size: 1.1em;
+    }
+
+    .tabs {
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .tab-button {
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .tab-button:hover {
+        background-color: hsl(22, 92%, 45%);
+        transform: scale(1.05);
+    }
+
+    .active {
+        background-color: hsl(22, 92%, 45%);
+        /*  for the active state */
+        color: white;
+        /* Ensure the text is readable */
+        font-weight: bold;
+        /* Make it stand out */
+        transform: scale(1.05);
+        /* Slightly enlarge the active button */
+    }
+</style>
+
+<script>
+
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+        var quantities = document.querySelectorAll('.item-quantity');
+        var itemSelected = Array.from(quantities).some(input => input.value > 0);
+
+        if (!itemSelected) {
+            e.preventDefault();
+            $('#noItemsModal').modal('show');
+            return;
+        }
+
+        var userIsAuthenticated = {{user.is_authenticated|yesno:"true,false"}};
+
+    if (!userIsAuthenticated) {
+        e.preventDefault();
+        saveQuantitiesToLocalStorage(quantities);
+        $('#loginModal').modal('show');
+    } else {
+        localStorage.removeItem('quantities');
+    }
+});
+
+    window.onload = function () {
+        showMenu('{{ menus.first.name }}');
+        loadQuantitiesFromLocalStorage();
+    };
+
+</script>
+
+{% endblock %}

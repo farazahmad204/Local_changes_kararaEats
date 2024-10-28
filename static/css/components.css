@@ -1,0 +1,48 @@
+/* components.css */
+/* Button styles, forms, etc. */
+
+
+
+
+/*****************************************All Button components*************************************************/
+.btn {
+    transition: all 0.3s ease-in-out;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, #ff5100, #0072ff);
+    color: white;
+    border: none;
+}
+
+.btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.fancy-btn {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fancy-btn:hover {
+    background-color: #28a745;
+    transform: scale(1.1);
+}
+
+.logout-btn {
+    color: #ffffff !important;
+    border-radius: 50px;
+    padding: 10px 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+    background-color: #dc3545;
+}
+
+.logout-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+

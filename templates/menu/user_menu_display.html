@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Menus{% endblock %}
+
+{% block content %}
+
+<!-- ********************* Menu to  Show ****************************************************************************-->
+
+<div class="container mt-2">
+    <h2 class="display-4 text-center fadeInUp"><strong><span class="MainHeadline">Explore Our Menus</span></strong></h2>
+    <p class="text-center mb-5 custom-font text-light "><strong>Select your favorite items and place an order in just a
+            few clicks! </strong> </p>
+
+    <!-- Form to handle order items -->
+    <form id="orderForm" method="post" action="{% url 'order_items' %}">
+        {% csrf_token %}
+        <div class="row mt-4">
+            {% for menu in menus %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-lg animated fadeInUp" style="transition: transform 0.3s;">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary" id="#{{ menu.name }}">{{ menu.name }}</h5>
+
+                        <input type="hidden" name="menu_id" value="{{ menu.id }}">
+
+                        <ul class="list-group list-group-flush">
+                            {% for item in menu.food_items.all %}
+                            <li class="list-group-item d-flex align-items-center animated fadeIn">
+                                {% if item.picture %}
+                                <img src="{{ item.picture.url }}" alt="{{ item.name }}" class="img-thumbnail mr-3"
+                                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                                {% endif %}
+                                <div>
+                                    <strong>{{ item.name }}</strong> - <span class="text-success">${{item.price}}</span>
+                                </div>
+                                <small class="text-muted ml-2">{{ item.description }}</small>
+                                <div class="ml-auto">
+                                    <input type="number" name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
+                                        class="form-control item-quantity" value="8" placeholder="Qty"
+                                        style="width: 70px;">
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Submit button -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
+                <i class="fas fa-shopping-cart"></i> Order Selected Items
+            </button>
+        </div>
+
+    </form>
+
+
+    <form method="POST" action="{% url 'WeeklyMenu' %}">
+        {% csrf_token %}
+        <button id="changeViewBtn" class="view-button">Switch to Grid View</button>
+    </form>
+
+
+
+
+
+</div>
+
+<!--==========================  Modal for Login Prompt  ===================================-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title text-light" id="loginModalLabel"> 
+                    <img src="{% static 'images/user.svg' %}" alt="user icon" class="img-thumbnail mr-3"
+                                    style="width: 50px; height: 80px; object-fit: cover; border-radius: 50%;">
+                    <span> Login Required</span></h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <p class="custom-font">You need to log in to place an order. Please log in or register to continue.</p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn custom-font ">Login</button>
+                </form>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"><label for="#loginModal"
+                        class="custom-font"></label>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--========================== Modal for No Items Selected Prompt ===================================-->
+
+<div class="modal fade" id="noItemsModal" tabindex="-1" role="dialog" aria-labelledby="noItemsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-light" id="noItemsModalLabel">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span>No Items Selected </span>
+                </h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <p class="custom-font">Please select at least one item to place an order.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"><label for="#noItemsModal"
+                        class="custom-font"></label>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ************************************************** DeliveryModal option Modal ***************************************************************************-->
+
+<div class="modal fade" id="DeliveryModal" tabindex="-1" aria-labelledby="DeliveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  animated fadeIn text-light" id="DeliveryModalLabel"><i class="fa-solid fa-car"></i>  Delivery
+                    Option</h5>
+                    <button type="button" id="close" class="logout-btn custom-font" data-bs-dismiss="modal"
+                        aria-label="Close">X</button>
+            </div>
+
+            <div class="modal-body text-center">
+                <hr>
+                <form method="post" action="{% url 'confirm_order' %}" class="animated fadeInUp">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-check animated fadeIn">
+                            <input type="radio" id="self_pickup" name="delivery_option" value="self_pickup"
+                                class="form-check-input" checked>
+                            <label for="self_pickup" class="form-check-label">Self-Pickup</label>
+                        </div>
+                        <div class="form-check animated fadeIn mt-2">
+                            <input type="radio" id="home_delivery" name="delivery_option" value="home_delivery"
+                                class="form-check-input">
+                            <label for="home_delivery" class="form-check-label">Home Delivery </label>
+                        </div>
+                        <br>
+                        <hr>
+                        <p class="text-center custom-font animated fadeInup fa-solid">Delivery Fee applied if total is below $50
+                        </p>
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="confirm_order" id="confirmBtn" class="logout-btn custom-font">Confirm
+                    Order</button>
+
+                    <button type="button" class="logout-btn custom-font" id="cancelBtn" data-bs-dismiss="modal"><label for="#DeliveryModal"
+                            class="custom-font"></label>
+                        Close</button>
+
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+     document.getElementById('orderForm').addEventListener('submit', function (e) {
+        // Check if user is authenticated
+        var userIsAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+
+        if (!userIsAuthenticated) {
+            // Prevent form submission
+            e.preventDefault();
+            // Show the login modal
+            $('#loginModal').modal('show');
+            return;
+        }
+
+        // Check if any item quantity is greater than 0
+        var quantities = document.querySelectorAll('.item-quantity');
+        console.log("item-quantity quantities are ",quantities);
+        var itemSelected = false;
+
+        quantities.forEach(function(input) {
+            if (input.value > 0) {
+                itemSelected = true;
+            }
+        });
+
+        if (!itemSelected) {
+            // Prevent form submission
+            e.preventDefault();
+            // Show the "No Items Selected" modal
+            $('#noItemsModal').modal('show');
+        }
+
+        
+
+    });
+
+    // Add hover effect for cards
+    document.querySelectorAll('.card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+</script>
+
+
+<!-- Custom CSS for styling -->
+<style>
+    .modal-dialog {
+        display: flex;
+        align-items: center;
+        min-height: calc(100vh - 10rem);
+        /* Ensures the modal is centered vertically */
+        /* min-width: calc(200vh - 10rem); */
+        margin-left: 40%;
+        margin-top: 50px;
+    }
+
+    .modal-dialog .modal-content {
+
+        background-color: rgb(221, 219, 219);
+    }
+</style>
+
+{% endblock %}

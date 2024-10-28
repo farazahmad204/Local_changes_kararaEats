@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Food Item{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="display-4 text-center">Create New Food Item</h2>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+        <div class="card shadow-lg animated fadeInUp">
+          <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+              
+              <!-- Name Field -->
+              <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {% for error in form.name.errors %}
+                  <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+              </div>
+              <!-- Description Field -->
+              <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+                {% for error in form.description.errors %}
+                  <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+              </div>
+              <!-- Picture Field -->
+              <div class="form-group">
+                {{ form.picture.label_tag }}
+                {{ form.picture }}
+                {% for error in form.picture.errors %}
+                  <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+              </div>
+
+              <!-- Price Field -->
+              <div class="form-group">
+                {{ form.price.label_tag }}
+                {{ form.price }}
+                {% for error in form.price.errors %}
+                  <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+              </div>
+
+              <!-- Quantity Field -->
+              <div class="form-group">
+                {{ form.quantity.label_tag }}
+                {{ form.quantity }}
+                {% for error in form.quantity.errors %}
+                  <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-group text-center">
+                <button type="submit" class="btn btn-success btn-lg">Create Item</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation styles */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated {
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    .fadeInUp {
+      animation-name: fadeInUp;
+    }
+  </style>
+{% endblock %}

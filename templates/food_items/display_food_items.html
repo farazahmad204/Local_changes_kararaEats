@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Food Items{% endblock %}
+
+{% block content %}
+  <div class="container mt-5 text-start">
+    <!-- Button to create a new food item -->
+    <div class="text-center mb-4">
+      <a href="{% url 'create_food_item' %}" class="btn btn-success btn-lg shadow-lg fancy-btn">Create New Food Item</a>
+    </div>
+
+
+
+    <div class="row mt-4">
+      {% for item in food_items %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-lg animated fadeInUp">
+            <!-- Add zoom effect to image -->
+            <div class="img-container">
+              <img src="{{ item.picture.url }}" class="card-img-top" alt="{{ item.name }}">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text text-muted">Quantity: {{ item.quantity }}</p>
+              <span class="badge badge-success">${{ item.price }}</span>
+            </div>
+            <div class="card-footer text-center">
+            <button><a href="{% url 'edit_food_item' item.id %}" class="btn btn-sm btn-primary fancy-btn">Edit</a></button>
+          <button> <a href="{% url 'delete_food_item' item.id %}" class="btn btn-sm btn-danger fancy-btn" id="delete">Delete</a></button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+
+<!--==========================  Modal for Confirmation Prompt to delete  ===================================-->
+<div class="modal fade" id="ConfirmationPrompt" tabindex="-1" role="dialog" aria-labelledby="ConfirmationPromptLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title text-light" id="ConfirmationPromptLabel"> 
+                    <img src="{% static 'images/user.svg' %}" alt="user icon" class="img-thumbnail mr-3"
+                                    style="width: 50px; height: 80px; object-fit: cover; border-radius: 50%;">
+                    <span> Confirmation Required</span></h5>
+                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <p class="custom-font">Are you sure you want to delete this food item?</p>
+            </div>
+            <div class="modal-footer">
+              <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{% url 'food_items_management' %}" class="btn btn-secondary">Cancel</a>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  <style>
+    .btn {
+        transition: all 0.3s ease-in-out;
+        padding: 15px 20px;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        background-image: linear-gradient(to right, #ff5100, #0072ff);
+        color: white;
+        border: none;
+    }
+
+    .btn:hover {
+        transform: scale(1.15);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        background-image: linear-gradient(to right, #083f91, #00f2fe);
+    }
+    /* Button animations */
+    .fancy-btn {
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .fancy-btn:hover {
+      background-color: #28a745;
+      transform: scale(1.1);
+    }
+    /* Image zoom effect
+    .img-container {
+      overflow: hidden;
+    }
+
+    .card-img-top {
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .img-container:hover .card-img-top {
+      transform: scale(1.1);
+    }
+
+    /* Card animation 
+    .card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+
+    /* Animation styles 
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated {
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    .fadeInUp {
+      animation-name: fadeInUp;
+    } */
+  </style>
+
+  <script>
+     
+    document.getElementById('delete').addEventListener('click', function (e) {
+        // Check if user is authenticated
+        var userIsAuthenticated = {{ user.is_authenticated| yesno: "true,false"
+      }};
+
+      if (userIsAuthenticated) {
+        // Prevent form submission
+        e.preventDefault();
+        // Show the login modal
+        $('#ConfirmationPrompt').modal('show');
+        return;
+      }
+    });
+
+  </script>
+{% endblock %}

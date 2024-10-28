@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Menus{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="display-4 text-center animated fadeInUp">Available Menus</h2>
+
+    <!-- Button to create a new menu -->
+    <div class="text-center mb-4 animated fadeInUp delay-1s">
+        <a href="{% url 'create_menu' %}" class="btn btn-success btn-lg shadow-lg">Create New Menu</a>
+    </div>
+
+    <div class="row mt-4">
+        {% for menu in menus %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-lg animated fadeInUp" style="animation-delay:1000ms;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ menu.name }}</h5>
+                        <ul class="list-group list-group-flush">
+                            {% for item in menu.food_items.all %}
+                                <li class="list-group-item d-flex align-items-center">
+                                    {% if item.picture %}
+                                        <img src="{{ item.picture.url }}" alt="{{ item.name }}" class="img-thumbnail mr-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                    {% endif %}
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <strong>{{ item.name }}         ${{ item.price }}</strong>
+                                                <br>
+                                                <small class="text-muted">{{ item.description }}</small>
+                                            </div>
+
+                                        </div>
+
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <a href="{% url 'edit_menu' menu.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <form action="{% url 'delete_menu' menu.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation styles */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    .fadeInUp {
+        animation-name: fadeInUp;
+    }
+
+
+</style>
+{% endblock %}

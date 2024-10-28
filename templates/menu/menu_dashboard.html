@@ -1,0 +1,72 @@
+<!-- templates/menu/menu_dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Menu Dashboard{% endblock %}
+
+{% block content %}
+<div class="container text-start mt-5">
+    <h2 class="display-4 animated fadeInUp"><span class="MainHeadline">Menu Management</span></h2>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-4 mb-4 animated fadeInUp delay-2s">
+            <a href="{% url 'display_menu' %}" class="btn btn-primary btn-lg btn-block shadow-lg">View Menus</a>
+        </div>
+        <div class="col-md-4 mb-4 animated fadeInUp delay-3s">
+            <a href="{% url 'create_menu' %}" class="btn btn-success btn-lg btn-block shadow-lg">Create Menu</a>
+        </div>
+        
+    </div>
+</div>
+
+<style>
+
+h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: bold;
+            color: #0e0e0e;
+            text-align: start;
+            margin-bottom: 10px;
+            animation: slideInFromRight 0.8s ease-in-out;
+        }
+
+    .btn {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animation styles */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animated {
+        animation-duration: 0.8s;
+        animation-fill-mode: both;
+    }
+
+    .fadeInUp {
+        animation-name: fadeInUp;
+    }
+
+    .delay-1s { animation-delay: 0s; }
+    .delay-2s { animation-delay: 0s; }
+    .delay-3s { animation-delay: 0s; }
+    .delay-4s { animation-delay: 0s; }
+    .delay-5s { animation-delay: 0s; }
+</style>
+{% endblock %}
