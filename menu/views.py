@@ -67,10 +67,10 @@ class DeleteMenuView(View):
         return redirect('display_menu')
 
 
-class MenuDashboardView(View):
-    def get(self, request):
-        menus = Menu.objects.all()  # Fetch all menus
-        return render(request, 'menu/menu_dashboard.html', {'menus': menus})
+# class MenuDashboardView(View):
+#     def get(self, request):
+#         menus = Menu.objects.all()  # Fetch all menus
+#         return render(request, 'menu/menu_dashboard.html', {'menus': menus})
 
 
 # Weekly Menu view

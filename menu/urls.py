@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import DisplayMenuView, CreateMenuView, EditMenuView, DeleteMenuView, MenuDashboardView, DisplayUserMenuView,WeeklyMenuDisplay
+from .views import DisplayMenuView, CreateMenuView, EditMenuView, DeleteMenuView, DisplayUserMenuView,WeeklyMenuDisplay
 from .import views
 urlpatterns = [
-    path('dashboard/', MenuDashboardView.as_view(), name='menu_dashboard'),
+    #path('dashboard/', MenuDashboardView.as_view(), name='menu_dashboard'),
     path('', DisplayUserMenuView.as_view(), name='display_menu_user'),
     path('menu/', DisplayMenuView.as_view(), name='display_menu'),
     path('create/', CreateMenuView.as_view(), name='create_menu'),

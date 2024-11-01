@@ -24,11 +24,11 @@ from kararaeats_web.views import  *  # Import your custom view
 #handler404 = custom_page_not_found_view
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', HomeView.as_view(), name='home'),
-    path('special_home/', SpecialHomeView.as_view(), name='special_home'),
+   # path('home/', HomeView.as_view(), name='home'),
+    #path('special_home/', SpecialHomeView.as_view(), name='special_home'),
     path('about_us/', AboutUsView.as_view(), name='about_us'),
    # path('contact_us/', ContactUsView.as_view(), name='contact_us'),
-    path('order_status/', HomeView.as_view(), name='order_status'),
+   # path('order_status/', HomeView.as_view(), name='order_status'),
     path('', include('accounts.urls')),  # Include the accounts app URLs
     path('menu/', include('menu.urls')),
     path('', include('fooditems.urls')),  # Include the accounts app URLs

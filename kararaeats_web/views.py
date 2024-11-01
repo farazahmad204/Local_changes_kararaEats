@@ -5,22 +5,22 @@ from menu.views import Menu
 from fooditems.views import FoodItem
 
 
-class HomeView(TemplateView):
-    template_name = 'home.html'
+# class HomeView(TemplateView):
+#     template_name = 'home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Menu.objects.all()  # Pass all categories to the template
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['categories'] = Menu.objects.all()  # Pass all categories to the template
+#         return context
 
 
-class SpecialHomeView(TemplateView):
-    template_name = 'special_home.html'
+# class SpecialHomeView(TemplateView):
+#     template_name = 'special_home.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = FoodItem.objects.all()  # Pass all categories to the template
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['categories'] = FoodItem.objects.all()  # Pass all categories to the template
+#         return context
     
 
 
