@@ -4,6 +4,8 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from .models import FoodItem, Menu, Order, OrderItem
 
+from email_service.views  import send_order_confirmation_email ,send_emails
+
 
 @method_decorator(login_required, name='dispatch')
 class OrderItemsView(View):
@@ -55,6 +57,7 @@ class OrderItemsView(View):
         ordered_menus = request.session.get('ordered_menus', {})
         total_amount = request.session.get('total_amount', 0.0)
         total_amount_per_menu = []
+        display_total_amount_per_menu=[]
         # Reconstruct ordered menus with actual model objects
         reconstructed_menus = {}
         for menu_id, items in ordered_menus.items():
@@ -70,10 +73,12 @@ class OrderItemsView(View):
                 total_amount += item_price
                 reconstructed_menus[menu].append((food_item, quantity, item_price))
             total_amount_per_menu.append(total_amount)
-        print(total_amount_per_menu)
+            display_total_amount_per_menu.append(total_amount * quantity)
+        print("total_amount_per_menu", total_amount_per_menu)
+        print("total_amodisplay_total_amount_per_menuunt_per_menu", display_total_amount_per_menu)
         total_amount = sum(total_amount_per_menu)
         if total_amount == 0.0:
-            return redirect('display_menu_user')
+            return redirect('WeeklyMenu')
         # Handle delivery options and delivery fees
         delivery_option = request.POST.get('delivery_option')
         delivery_fee = 0.0
@@ -106,11 +111,24 @@ class OrderItemsView(View):
         request.session.pop('ordered_menus', None)
         request.session.pop('total_amount', None)
 
+        
+        #send_order_confirmation_email(request)  # Send the email
+
+        send_order_confirmation_email(request,'farazahmed204@gmail.com' ,context={
+            'ordered_menus': reconstructed_menus,
+            'total_amount': total_amount,
+            'delivery_option': delivery_option,
+            'delivery_fee': delivery_fee,
+            'final_total': final_total,
+            'display_total_amount_per_menu':display_total_amount_per_menu
+        })
+        reconstructed_menus       
         # Render the order confirmation page
         return render(request, 'orders/order_confirmation.html', {
             'ordered_menus': reconstructed_menus,
             'total_amount': total_amount,
             'delivery_option': delivery_option,
             'delivery_fee': delivery_fee,
-            'final_total': final_total
+            'final_total': final_total,
+            'display_total_amount_per_menu':display_total_amount_per_menu
         })

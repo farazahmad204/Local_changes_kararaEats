@@ -4,9 +4,17 @@ from .models import Mail
 
 from django.template.loader import render_to_string
 
+from django.utils.html import strip_tags
+
+from django.core.mail import EmailMultiAlternatives
+
 from django.core.mail import send_mail
 
 from django.contrib import messages
+
+from order.models import FoodItem, Menu, Order, OrderItem
+
+
 
 from .forms import ContactUsForm
 
@@ -81,3 +89,16 @@ def contact_us(request):
 
     return render(request,'contact_us.html', {'form': form})
 
+def send_order_confirmation_email(request,user_email='None', context=None ):
+
+    emails = Mail.objects.values_list('email', flat=True)  # Assuming YourModel has an 'email' field
+    subject = 'Order Confirmation'
+    message = 'This is a sample Content Your email content here'
+
+    for email in emails:
+        if email == user_email:
+            all_values= Mail.objects.filter(email=user_email).values()#Mail.objects.all().values()
+            message_html= render_to_string('email/order_confirmation.html',context=context)
+            send_mail(subject, message, 'farazahmed204@gmail.com', [email], html_message=message_html)
+
+    return None

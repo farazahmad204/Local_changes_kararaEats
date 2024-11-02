@@ -4,8 +4,10 @@ from .forms import MenuForm
 from django.views import View
 from django.shortcuts import redirect, get_object_or_404
 from .models import Menu
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
-
+@method_decorator(login_required, name='dispatch')
 class DisplayMenuView(ListView):
     model = Menu
     template_name = 'menu/display_menu.html'
@@ -13,12 +15,12 @@ class DisplayMenuView(ListView):
 
 
 class DisplayUserMenuView(ListView):
-    model = Menu
-    template_name = 'menu/user_menu_display.html'
-    context_object_name = 'menus'
+     model = Menu
+     template_name = 'menu/user_menu_display.html'
+     context_object_name = 'menus'
 
-    # Override get_context_data to customize context
-    def get_context_data(self, **kwargs):
+     # Override get_context_data to customize context
+     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Assuming each menu has related food_items
         ordered_menus = {}
