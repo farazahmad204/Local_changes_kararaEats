@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h5 class="text-center animated fadeIn "><span class="MainHeadline">Order Confirmation</span></h5>
+    <h5 class="text-center animated fadeIn "><span>Order Confirmation</span></h5>
 
     <p class="text-center animated fadeInUp text-white">Thank you for your order, <strong>{{ user.username }}</strong>!</p>
     <p class="text-center mt-4 animated fadeInUp text-white">Your order has been placed successfully!</p>
@@ -16,9 +16,9 @@
     <div>
         <p class="custom-font-local fa-solid"><strong>Delivery Option:</strong> <span class="custom-font-local fa-solid">{{ delivery_option }}</span></p>
         <br>
-        <p class="custom-font-local fa-solid"><strong>Delivery Fee:</strong> ${{ delivery_fee }}</p>
+        <p class="custom-font-local fa-solid"><strong>Delivery Fee:</strong> AU$ {{ delivery_fee }}</p>
     </div>
-    <p class="custom-font-localfa-solid"><strong>Total Amount:</strong> <strong class="MainHeadline">${{ final_total }}</strong></p>
+    <p class="custom-font-localfa-solid"><strong>Total Amount:</strong> <strong>AU$ {{ final_total }}</strong></p>
 </div>
 
 <div class="order-details animated fadeInUp">
@@ -26,7 +26,7 @@
         <ul class="list-group animated fadeInUp">
             {% for menu, items in ordered_menus.items %}
                 <li class="list-group-item ">
-                    <h5><strong class="MainHeadline text-light">{{ menu.name }}</strong></h5>
+                    <h5><strong class="text-dark bold">{{ menu.name }}</strong></h5>
                     <ul class="list-group">
                         {% for food_item, quantity, item_price in items %}
                             <li class="list-group-item d-flex align-items-center justify-content-between bg-dark text-light">
@@ -35,19 +35,18 @@
                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                                 {% endif %}
                                 <div class="flex-grow-1">
-                                    <strong>{{ food_item.name }} (${{ item_price}})</strong>
+                                    <strong>{{ food_item.name }} (AU$ {{ item_price}})</strong>
                                 </div>
                                 <div>
-                                    Quantity: {{ quantity }} - Total: $ {{ item_price|times:quantity}}
+                                    Quantity: {{ quantity }} - Total: AU${{ item_price|times:quantity}}
                                 </div>
                             </li>
                         {% endfor %}
                         <li class="list-group-item d-flex align-items-center justify-content-between bg-light text-dark">
                             <div class="flex-grow-1">
-                                <strong>Sub Total ${{ ammount_per_menu}}</strong>
                             </div>
                             <div>
-                                Total: ${{ ammount_per_menu }}
+                                Total: AU${{ ammount_per_menu }}
                             </div>
                         </li>
                     </ul>
