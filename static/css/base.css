@@ -9,13 +9,13 @@ body {
     height: auto; /* Full height */
 }
 .custom-font {
-    font-family: 'Poppins', Cursive ,Monospace ,Fantasy ,Sans-serif, Serif; /* Change to your desired font */
-    font-size: 0.8em;
+    font-family:Sans-serif, Serif; /* Change to your desired font */
+    font-size: 1.0em;
 }
 .custom-font-brand
 {
-    font-family: 'Poppins', Cursive ,Monospace ,Fantasy ,Sans-serif, Serif; /* Change to your desired font */
-    font-size: 1em;
+    font-family: Sans-serif, Serif; /* Change to your desired font */
+    font-size: 1.4em;
 }
 .active
 {

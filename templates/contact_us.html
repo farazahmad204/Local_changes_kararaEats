@@ -17,9 +17,10 @@ K. Contact us
 
   <div class="container ">
     <div class="row">
-      <div class="col-lg-6 mt-2">
+      <div class="col-lg-12 mt-2">
         <h3 class="display-4 text-center fadeInUp"><strong><span class="MainHeadline">Contact Us</span></strong></h3>
-        <p  class="text-center mb-5 custom-font text-light ">Get in touch with us!</p>
+        <p  class="text-center mb-5 custom-font text-light ">
+        <strong><span style="background-color: hsl(0, 8%, 27%); padding: 5px;">Get in touch with us!</span></strong></p>
 
         <form method="post" action="{% url 'contact_us' %}">
           {% csrf_token %}
@@ -45,15 +46,7 @@ K. Contact us
         </form>
       </div>
 
-      <div class="col-lg-6 my-5">
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-success text-center">
-          {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-      </div>
+     
     </div>
   </div>
 
@@ -61,6 +54,10 @@ K. Contact us
 
 
 <style>
+  body
+    {
+        background-image: none;
+    }
   .contact-section {
     height: auto;
     /*  background-color: rgb(245, 220, 205);
