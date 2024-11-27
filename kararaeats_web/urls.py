@@ -35,6 +35,7 @@ urlpatterns = [
     path('orders/', include('order.urls')),
 
     path('email_service/',include('email_service.urls')),  # Include the Email app URLs
-
+    path('whatsapp_manager/', include('whatsapp_manager.urls')),  # Include the Email app URLs
+    path('database_view/', include('database_view.urls')),  # Include the Email app URLs
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
