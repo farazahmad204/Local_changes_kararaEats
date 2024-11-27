@@ -87,11 +87,14 @@
                                 <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
                                 <small class="text-muted d-block" style="font-style: italic;">{{ item.description }}</small>
                             </p>
-                            <h5 style="color: darkblue;">${{ item.price }}</h5>
-                            <div class="text-center">
+                            <h5 style="color: darkblue;">AU$ {{ item.price }}</h5>
+                            <div class="text-start">
+                                 <!-- Span for Quantity text -->
+                                <span class="text-start" style="font-size: 1em; margin-right: 5px;">Quantity:</span>
                                 <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
                                        name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
-                                       class="form-control item-quantity" value="0" placeholder="Qty" style="width: 70px; margin-top: 10px;">
+                                       class=" item-quantity" value="0" placeholder="Qty" style="width: 70px; margin-top: 10px;">
+                                       
                             </div>
                         </div>
                     </div>
