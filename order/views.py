@@ -114,15 +114,15 @@ class OrderItemsView(View):
         
         #send_order_confirmation_email(request)  # Send the email
 
-        send_order_confirmation_email(request,'farazahmed204@gmail.com' ,context={
-            'ordered_menus': reconstructed_menus,
-            'total_amount': total_amount,
-            'delivery_option': delivery_option,
-            'delivery_fee': delivery_fee,
-            'final_total': final_total,
-            'display_total_amount_per_menu':display_total_amount_per_menu
-        })
-        reconstructed_menus       
+        # send_order_confirmation_email(request,'farazahmed204@gmail.com' ,context={
+        #     'ordered_menus': reconstructed_menus,
+        #     'total_amount': total_amount,
+        #     'delivery_option': delivery_option,
+        #     'delivery_fee': delivery_fee,
+        #     'final_total': final_total,
+        #     'display_total_amount_per_menu':display_total_amount_per_menu
+        # })
+       # reconstructed_menus       
         # Render the order confirmation page
         return render(request, 'orders/order_confirmation.html', {
             'ordered_menus': reconstructed_menus,
