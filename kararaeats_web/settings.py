@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
 
     'email_service',  # email_serivce app
+    'cart',           # Cart app 
 
     ]
 
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -135,7 +137,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS= [BASE_DIR / 'static']
-# STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # or any other directory you prefer
 
 

@@ -79,3 +79,5 @@ class DeleteMenuView(View):
 def WeeklyMenuDisplay(request):
     menus = Menu.objects.all()  # Fetch all menus
     return render(request, 'menu/user_menu_weekly_display.html', {'menus': menus ,'user': request.user})
+
+

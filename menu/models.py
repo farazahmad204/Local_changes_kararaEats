@@ -1,5 +1,6 @@
 from django.db import models
 from fooditems.models import FoodItem
+from django.urls import reverse
 
 
 class Menu(models.Model):
@@ -9,3 +10,6 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
+
+
+

@@ -34,7 +34,13 @@ urlpatterns = [
     path('', include('fooditems.urls')),  # Include the accounts app URLs
     path('orders/', include('order.urls')),
 
-    path('email_service/',include('email_service.urls')),  # Include the Email app URLs
+    # Include the Email app URLs
+    
+    path('email_service/',include('email_service.urls')),  
+
+    # Cart app
+
+    path('cart/', include('cart.urls')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

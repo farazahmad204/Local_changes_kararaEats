@@ -9,6 +9,8 @@ urlpatterns = [
     path('edit/<int:pk>/', EditMenuView.as_view(), name='edit_menu'),
     path('delete/<int:pk>/', DeleteMenuView.as_view(), name='delete_menu'),
 
-
+    # Weekly Display
     path('Weeklymenu/', views.WeeklyMenuDisplay, name='WeeklyMenu'),
+
+
 ]
