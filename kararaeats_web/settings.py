@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-l$*lpcqn(yv6-k89owr!glf6p(8pnf64icxeu6-3@t2o^2nz&k
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+WEBSITE_MANAGERS = [{'username':'TanveerH1assan',
+                     'Access_id':'AbRt45&r'}]
 
 # Application definition
 
@@ -50,7 +51,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
 
     'email_service',  # email_serivce app
-
+    'database_view',
+    'whatsapp_manager'
     ]
 
 MIDDLEWARE = [

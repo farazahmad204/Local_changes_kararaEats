@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Message Delivery Report</h1>
+
+    <h2>Messages Sent Successfully:</h2>
+    {% if sent_successfully %}
+    <ul>
+        {% for user in sent_successfully %}
+        <li>{{ user.name }} ({{ user.whatsapp_num }})</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages were sent successfully.</p>
+    {% endif %}
+
+    <h2>Messages Failed to Send:</h2>
+    {% if failed_to_send %}
+    <ul>
+        {% for user in failed_to_send %}
+        <li>{{ user.name }} ({{ user.whatsapp_num }})</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No messages failed to send.</p>
+    {% endif %}
+
+    <a href="{% url 'send_message' %}" class="btn btn-primary mt-3">Send Another Message</a>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Items</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Food Items</h1>
+
+        <form method="get">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Search by name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" name="price_min" placeholder="Min price" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" name="price_max" placeholder="Max price" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in food_items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
