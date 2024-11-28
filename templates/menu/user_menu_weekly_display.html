@@ -58,74 +58,84 @@
     </div>
   </div>
 
-<div class="tabs">
-    {% for menu in menus %}
-    <button class="tab-button" onclick="showMenu('{{ menu.name }}')">
-        <span class="nav-link display-4 text-center fadeInUp custom-Tabs-font">{{ menu.name }}</span>
-    </button>
-    {% endfor %}
-</div>
+  <div class="menu-container mt-5" style="display: flex; height: 80vh;">
+    
+    <!-- Sidebar for Menu Names -->
+    <div class="sidebar" style="width: 250px; background-color:none; padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.1);">
+        <div class="tabs bg-white text-center">
+            <span style="font-size: 1.2em; font-weight: bold; color: #333;">Menu Of the Week</span>
+            {% for menu in menus %}
+            <button class="tab-button mt-2" onclick="showMenu('{{ menu.name }}')" style="width: 100%; padding: 15px; border: none; text-align: left; font-size: 1.2em; cursor: pointer;">
+                <span class="nav-link display-4 text-center fadeInUp custom-Tabs-font">{{ menu.name }}</span>
+            </button>
+            {% endfor %}
+        </div>
+    </div>
 
-<form id="orderForm" method="post" action="{% url 'order_items' %}">
-    {% csrf_token %}
-   
-    <div id="menuContent" class="mt-5">
+    <!-- Main Content Area -->
+    <div class="menu-content" style="flex: 1; padding: 20px; overflow-y: auto; background-color: #fff;">
 
+        <form id="orderForm" method="post" action="{% url 'order_items' %}">
+            {% csrf_token %}
+            
+            <div id="menuContent" class="mt-1">
+                {% for menu in menus %}
+                <div id="{{ menu.name }}" class="menu-section" style="display: none; background-color: white; padding: 20px; border-radius: 0px;">
+                    <input type="hidden" name="menu_id" value="{{ menu.id }}">
+                    <span class="nav-link display-4 text-center fadeInUp custom-font-Menu" style="font-size: 2em; font-weight: bold; color: #333;">{{ menu.name }}</span>
+                    <div class="menu-items" style="margin-top: 20px;">
 
-        {% for menu in menus %}
-        <div id="{{ menu.name }}" class="menu-section" style="display: none; background-color: white; padding: 20px; border-radius: 0px;">
-            <input type="hidden" name="menu_id" value="{{ menu.id }}">
-            <strong></strong><span class="nav-link display-4 text-center fadeInUp custom-font-Menu">{{ menu.name }}</span></strong>
-            <div class="menu-items">
-                {% for item in menu.food_items.all %}
-                <div class="menu-item " style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <!-- Item Details on the Left -->
-                    <div class="item-details" style="flex: 3; padding-right: 15px; text-align: start;">
-                        <div class="item-info">
-                            <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
-                            <small class="text-muted d-block" style="font-style: italic; font-size: 0.9em;">{{ item.description }}</small>
+                        {% for item in menu.food_items.all %}
+                        <div class="menu-item" style="display: flex; align-items: center; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 15px; padding: 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                            <!-- Item Details on the Left -->
+                            <div class="item-details" style="flex: 3; padding-right: 15px; text-align: start;">
+                                <div class="item-info">
+                                    <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
+                                    <small class="text-muted d-block" style="font-style: italic; font-size: 0.9em;">{{ item.description }}</small>
+                                </div>
+                                <div class="item-quantity" style="margin-top: 10px;">
+                                    <h5 style="color: darkblue; margin-top: 10px; text-align: start;">AU$ {{ item.price }}</h5>
+                                    <!-- Quantity input -->
+                                    <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
+                                    <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
+                                           name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
+                                           class="form-control item-quantity" value="0" placeholder="Qty" 
+                                           style="width: 70px; display: inline-block; margin-top: 10px;">
+                                </div>
+                            </div>
+
+                            <!-- Item Image on the Right -->
+                            <div class="item-image" style="flex: 1; padding-left: 15px; text-align: right;">
+                                {% if item.picture %}
+                                    <img class="img-fluid" alt="{{ item.name }}" src="{{ item.picture.url }}" 
+                                         style="height: 100px; width: 100px; object-fit: cover; border-radius: 10px;">
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="item-quantity" style="margin-top: 10px;">
-                            <h5 style="color: darkblue; margin-top: 10px; text-align: start;">AU$ {{ item.price }}</h5>
-                            <!-- Quantity input -->
-                            <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
-                            <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
-                                   name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
-                                   class="form-control item-quantity" value="0" placeholder="Qty" 
-                                   style="width: 70px; display: inline-block; margin-top: 10px;">
-                        </div>
+                        {% endfor %}
                     </div>
-                    
-                    <!-- Item Image on the Right -->
-                    <div class="item-image" style="flex: 1; padding-left: 15px; text-align: right;">
-                        {% if item.picture %}
-                            <img class="img-fluid" alt="{{ item.name }}" src="{{ item.picture.url }}" 
-                                 style="height: 100px; width: 100px; object-fit: cover; border-radius: 10px;">
-                        {% endif %}
-                    </div>
+                    <hr style="border-top: 2px solid lightgray;">
                 </div>
                 {% endfor %}
+
             </div>
-            <hr style="border-top: 2px solid lightgray;">
-        </div>
-    {% endfor %}
-    
-    
 
-
-        
-
-
-
+            <!-- Submit button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
+                    <i class="fas fa-shopping-cart"></i> Order Selected Items
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Submit button -->
-    <div class="text-center mt-4">
-        <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
-            <i class="fas fa-shopping-cart"></i> Order Selected Items
-        </button>
-    </div>
-</form>
+
+
+
+
+
+
 
 <!-- Modal for Login Prompt -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
