@@ -73,37 +73,50 @@
 
 
         {% for menu in menus %}
-        <div id="{{ menu.name }}" class="menu-section" style="display: none;">
+        <div id="{{ menu.name }}" class="menu-section" style="display: none; background-color: white; padding: 20px; border-radius: 0px;">
             <input type="hidden" name="menu_id" value="{{ menu.id }}">
+            <strong></strong><span class="nav-link display-4 text-center fadeInUp custom-font-Menu">{{ menu.name }}</span></strong>
             <div class="menu-items">
                 {% for item in menu.food_items.all %}
-                <div class="menu-item">
-                    <div class="card shadow-sm animated fadeIn" style="border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); height: 350px;">
-                        {% if item.picture %}
-                        <img class="img-fluid card-img-top" alt="{{ item.name }}" src="{{ item.picture.url }}" style="border-bottom: 3px solid aqua; border-radius: 15px 15px 0 0; height: 150px; object-fit: cover;">
-                        {% endif %}
-                        <div class="card-body text-center" style="padding: 15px;">
-                            <p class="card-text">
-                                <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
-                                <small class="text-muted d-block" style="font-style: italic;">{{ item.description }}</small>
-                            </p>
-                            <h5 style="color: darkblue;">AU$ {{ item.price }}</h5>
-                            <div class="text-start">
-                                 <!-- Span for Quantity text -->
-                                <span class="text-start" style="font-size: 1em; margin-right: 5px;">Quantity:</span>
-                                <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
-                                       name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
-                                       class=" item-quantity" value="0" placeholder="Qty" style="width: 70px; margin-top: 10px;">
-                                       
-                            </div>
+                <div class="menu-item " style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <!-- Item Details on the Left -->
+                    <div class="item-details" style="flex: 3; padding-right: 15px; text-align: start;">
+                        <div class="item-info">
+                            <strong style="font-size: 1.2em; color: darkslateblue;">{{ item.name }}</strong>
+                            <small class="text-muted d-block" style="font-style: italic; font-size: 0.9em;">{{ item.description }}</small>
                         </div>
+                        <div class="item-quantity" style="margin-top: 10px;">
+                            <h5 style="color: darkblue; margin-top: 10px; text-align: start;">AU$ {{ item.price }}</h5>
+                            <!-- Quantity input -->
+                            <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
+                            <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
+                                   name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
+                                   class="form-control item-quantity" value="0" placeholder="Qty" 
+                                   style="width: 70px; display: inline-block; margin-top: 10px;">
+                        </div>
+                    </div>
+                    
+                    <!-- Item Image on the Right -->
+                    <div class="item-image" style="flex: 1; padding-left: 15px; text-align: right;">
+                        {% if item.picture %}
+                            <img class="img-fluid" alt="{{ item.name }}" src="{{ item.picture.url }}" 
+                                 style="height: 100px; width: 100px; object-fit: cover; border-radius: 10px;">
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
             </div>
             <hr style="border-top: 2px solid lightgray;">
         </div>
-        {% endfor %}
+    {% endfor %}
+    
+    
+
+
+        
+
+
+
     </div>
 
     <!-- Submit button -->
@@ -278,7 +291,12 @@
         font-family: Sans-serif, Serif; /* Change to your desired font */
         font-size: 1.1em;
     }
+    .custom-font-Menu
+    {
+        font-family: Sans-serif, Serif; /* Change to your desired font */
+        font-size: 1.6em;
 
+    }
     .tabs {
         padding: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
