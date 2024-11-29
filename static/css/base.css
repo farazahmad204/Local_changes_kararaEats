@@ -41,6 +41,8 @@ h1,
             margin-bottom: 10px;
             animation: slideInFromRight 0.8s ease-in-out;
         }
+
+        
         @keyframes slideInFromRight {
             from {
                 transform: translateX(100%);

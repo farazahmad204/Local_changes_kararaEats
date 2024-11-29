@@ -58,22 +58,224 @@
     </div>
   </div>
 
-  <div class="menu-container mt-5" style="display: flex; height: 80vh;">
-    
-    <!-- Sidebar for Menu Names -->
-    <div class="sidebar" style="width: 250px; background-color:none; padding: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.1);">
-        <div class="tabs bg-white text-center">
+  <style>
+
+    .sidebar {
+        width: 250px;
+        background-color:none; 
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+    /* General Menu Styling */
+    .menu-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .menu-item {
+        flex: 0 1 30%;
+        margin: 15px;
+        display: flex;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+    }
+
+    .card img {
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card {
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-check {
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tab Styles */
+    .custom-Tabs-font {
+        font-family: Sans-serif, Serif;
+        font-size: 1.1em;
+    }
+
+    .custom-font-Menu {
+        font-family: Sans-serif, Serif;
+        font-size: 1.6em;
+    }
+
+    .tabs {
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .tab-button {
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        width: 100%;
+        padding: 15px;
+        text-align: left;
+        font-size: 1.2em;
+    }
+
+    .tab-button:hover {
+        background-color: hsl(22, 92%, 45%);
+        transform: scale(1.05);
+    }
+
+    .active {
+        background-color: hsl(22, 92%, 45%);
+        color: white;
+        font-weight: bold;
+        transform: scale(1.05);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+        .menu-item {
+            flex: 0 1 45%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        /* Display Sidebar Menu horizontally on small screens */
+        .sidebar {
+            width: 670px;
+            padding: 15px;
+            box-shadow: none;
+            margin-top: 20px;
+            background-color:none;
+        }
+
+        .tabs {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between; /* Arrange menu horizontally */
+            overflow-x: auto;
+            white-space: nowrap; /* Prevent wrapping of menu items */
+        }
+
+        .tab-button {
+        margin: 0 px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 2px;
+        transition: background-color 0.3s, transform 0.2s;
+        width: 19%;
+        padding: 15px;
+        text-align: start;
+        font-size: 1.0em;
+        padding: 1px;
+        margin: 1px;
+        white-space: nowrap; /* Prevent text from wrapping */
+        flex: none; /* Prevent buttons from shrinking */
+
+    }
+
+        /* Allow horizontal scrolling of tabs */
+        .tabs {
+            overflow-x: auto;
+        }
+
+        /* Menu Content Below on Small Screens */
+        .menu-container {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .menu-content {
+            padding: 20px 10px;
+            overflow-y: auto;
+        }
+
+        .menu-items {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .sidebar {
+            width: 500px;
+            padding: 15px;
+            box-shadow: none;
+            margin-top: 20px;
+            background-color:none;
+        }
+        .menu-item {
+            flex: 0 1 100%;
+            margin: 10px 0;
+        }
+
+        .tabs {
+            padding: 5px;
+        }
+
+        .tab-button {
+            font-size: 0.9em;
+            padding: 8px;
+        }
+
+        .menu-items {
+            flex-direction: column;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-image {
+            flex: 1;
+        }
+    }
+</style>
+
+
+<div class="menu-container mt-5" style="display: flex; flex-wrap: wrap; height: auto;">
+
+     <!-- Sidebar for Menu Names -->
+     <div class="sidebar">
+        <!-- On small screens, show dropdown button instead of tabs -->
+        <div class="tabs bg-white text-center" style="display:flexbox;">
             <span style="font-size: 1.2em; font-weight: bold; color: #333;">Menu Of the Week</span>
-            {% for menu in menus %}
-            <button class="tab-button mt-2" onclick="showMenu('{{ menu.name }}')" style="width: 100%; padding: 15px; border: none; text-align: left; font-size: 1.2em; cursor: pointer;">
-                <span class="nav-link display-4 text-center fadeInUp custom-Tabs-font">{{ menu.name }}</span>
-            </button>
-            {% endfor %}
+            <div id="menuOptions" class="menu-options">
+                {% for menu in menus %}
+                    <button class="tab-button" onclick="showMenu('{{ menu.name }}')">{{ menu.name }}</button>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
     <!-- Main Content Area -->
-    <div class="menu-content" style="flex: 1; padding: 20px; overflow-y: auto; background-color: #fff;">
+    <div class="menu-content" style="flex: 1; padding: 20px; overflow-y: auto; background-color:none">
 
         <form id="orderForm" method="post" action="{% url 'order_items' %}">
             {% csrf_token %}
@@ -83,10 +285,18 @@
                 <div id="{{ menu.name }}" class="menu-section" style="display: none; background-color: white; padding: 20px; border-radius: 0px;">
                     <input type="hidden" name="menu_id" value="{{ menu.id }}">
                     <span class="nav-link display-4 text-center fadeInUp custom-font-Menu" style="font-size: 2em; font-weight: bold; color: #333;">{{ menu.name }}</span>
+                    
+                     <!-- Submit button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
+                            <i class="fas fa-shopping-cart"></i> Order Selected Items
+                        </button>
+                    </div>
+            
                     <div class="menu-items" style="margin-top: 20px;">
 
                         {% for item in menu.food_items.all %}
-                        <div class="menu-item" style="display: flex; align-items: center; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 15px; padding: 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                        <div class="menu-item" style="display: flex; align-items: center; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 15px; padding: 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
                             <!-- Item Details on the Left -->
                             <div class="item-details" style="flex: 3; padding-right: 15px; text-align: start;">
                                 <div class="item-info">
@@ -119,16 +329,11 @@
                 {% endfor %}
 
             </div>
-
-            <!-- Submit button -->
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
-                    <i class="fas fa-shopping-cart"></i> Order Selected Items
-                </button>
-            </div>
         </form>
     </div>
 </div>
+
+
 
 
 
@@ -188,158 +393,7 @@
     </div>
 </div>
 
-<!-- Delivery Option Modal -->
-<div class="modal fade" id="DeliveryModal" tabindex="-1" aria-labelledby="DeliveryModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title animated fadeIn text-light" id="DeliveryModalLabel"><i
-                        class="fa-solid fa-car"></i> Delivery Option</h5>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
-                    aria-label="Close">X</button>
-            </div>
-            <div class="modal-body text-center">
-                <hr>
-                <form method="post" action="{% url 'confirm_order' %}" class="animated fadeInUp">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <div class="form-check animated fadeIn">
-                            <input type="radio" id="self_pickup" name="delivery_option" value="self_pickup"
-                                class="form-check-input" checked>
-                            <label for="self_pickup" class="form-check-label">Self-Pickup</label>
-                        </div>
-                        <div class="form-check animated fadeIn mt-2">
-                            <input type="radio" id="home_delivery" name="delivery_option" value="home_delivery"
-                                class="form-check-input">
-                            <label for="home_delivery" class="form-check-label">Home Delivery</label>
-                        </div>
-                        <br>
-                        <hr>
-                        <p class="text-center custom-font animated fadeInup fa-solid">Delivery Fee applied if total is
-                            below $50</p>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="confirm_order" id="confirmBtn" class="logout-btn custom-font">Confirm
-                    Order</button>
-                <button type="button" class="logout-btn custom-font" id="cancelBtn"
-                    data-bs-dismiss="modal">Close</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-<style>
-    .menu-items {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        margin-top: 20px;
-    }
-
-    .menu-item {
-        flex: 0 1 30%;
-        /* Adjust the width of each item */
-        margin: 15px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .card {
-        width: 100%;
-        /* Ensures the card takes full width of the menu-item */
-        height: 100%;
-        /* Makes the card the full height of the menu-item */
-    }
-
-    .card img {
-        height: 150px;
-        /* Fixed height for the image */
-        object-fit: cover;
-        /* Ensures the image covers the space without distortion */
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* Ensures consistent spacing in the card body */
-    }
-
-    .card {
-        transition: box-shadow 0.3s;
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Modal styles */
-    .modal-dialog {
-        display: flex;
-        align-items: center;
-        min-height: calc(100vh - 10rem);
-        margin-left: 40%;
-        margin-top: 50px;
-    }
-
-    .modal-dialog .modal-content {
-        background-color: rgb(221, 219, 219);
-    }
-
-    /* Form check styles */
-    .form-check {
-        padding: 10px;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .custom-Tabs-font {
-        font-family: Sans-serif, Serif; /* Change to your desired font */
-        font-size: 1.1em;
-    }
-    .custom-font-Menu
-    {
-        font-family: Sans-serif, Serif; /* Change to your desired font */
-        font-size: 1.6em;
-
-    }
-    .tabs {
-        padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .tab-button {
-        margin: 0 5px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .tab-button:hover {
-        background-color: hsl(22, 92%, 45%);
-        transform: scale(1.05);
-    }
-
-    .active {
-        background-color: hsl(22, 92%, 45%);
-        /*  for the active state */
-        color: white;
-        /* Ensure the text is readable */
-        font-weight: bold;
-        /* Make it stand out */
-        transform: scale(1.05);
-        /* Slightly enlarge the active button */
-    }
-</style>
 
 <script>
 

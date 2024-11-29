@@ -9,88 +9,82 @@
 
 <!-- About Us Section -->
 <section class="about-section text-start border">
-    <div class="container mt-1 border">
-        <div class="row ">
-            <div class="col-lg-6">
-                <div class="container text-start">
-                    <h1 style="color:#3f3d3d;">About Us</h1>
-                    <p> Welcome to <strong class="text-danger">KararaEats</strong>, where the vibrant flavors of South
-                        Asian cuisine come
-                        to life! Nestled in the heart of [Location], we are passionate about bringing the authentic
-                        taste of desi dishes to
-                        our community.
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Text Content Section -->
+            <div class="col-lg-6 col-md-12">
+                <div class="text-content">
+                    <h1 class="MainHeadline" style="color:#3f3d3d;">About Us</h1>
+                    <p>Welcome to <strong class="text-danger">KararaEats</strong>, where the vibrant flavors of South
+                        Asian cuisine come to life! Nestled in the heart of [Location], we are passionate about bringing the authentic
+                        taste of desi dishes to our community.
                         Whether you're here for a family gathering, a special celebration, or simply to indulge in
                         your favorite desi comfort food, we strive to create a warm and welcoming atmosphere where
                         everyone feels like family.</p>
 
                     <h2 style="color:#3f3d3d;">Why Choose Us?</h2>
-                    <ol>
-                        <p class="text-start">At <strong class="text-danger">KararaEats</strong>, we believe that food
-                            is more than just a meal; it's an
-                            experience that connects people and celebrates heritage. Our menu features a carefully
-                            curated selection of traditional dishes, including our signature <strong
-                                class="text-warning">Karachi Biryani</strong>—a fragrant
-                            and spicy rice dish layered with marinated meat and infused with aromatic spices. 
-                            Our chefs, hailing from diverse culinary backgrounds, are dedicated to using only the
-                            freshest ingredients and traditional cooking techniques. From the savory delights of <strong
-                                class="text-info">Nihari</strong> and
-                            <strong class="text-info">Karahi</strong> to the sweet indulgence of <strong
-                                class="text-info">Gulab Jamun </strong> and <strong class="text-info">Jalebi</strong>,
-                            each dish is crafted with love and
-                            care, ensuring an authentic taste that feels like home.
-                        </p>
+                    <p>At <strong class="text-danger">KararaEats</strong>, we believe that food is more than just a meal; it's an
+                        experience that connects people and celebrates heritage. Our menu features a carefully
+                        curated selection of traditional dishes, including our signature <strong class="text-warning">Karachi Biryani</strong>—a fragrant
+                        and spicy rice dish layered with marinated meat and infused with aromatic spices. 
+                        Our chefs, hailing from diverse culinary backgrounds, are dedicated to using only the
+                        freshest ingredients and traditional cooking techniques. From the savory delights of <strong class="text-info">Nihari</strong> and
+                        <strong class="text-info">Karahi</strong> to the sweet indulgence of <strong class="text-info">Gulab Jamun</strong> and <strong class="text-info">Jalebi</strong>,
+                        each dish is crafted with love and care, ensuring an authentic taste that feels like home.
+                    </p>
 
-                        <h2 style="color:#3f3d3d;">What We Offer</h2>
-                        <ul>
-                            <li><strong class="animated fadeInUp delay-1s">🍽️ Catering</strong> 
-                                <p>Whether it's a wedding, birthday, or corporate event, our
-                                catering services are tailored to
-                                make your special occasions unforgettable. We offer customizable menus to suit your
-                                needs, ensuring every guest experiences the best of Pakistani cuisine.</p></li>
-                            <li><strong class="animated fadeInUp delay-2s">🍽️ Tiffin Services</strong> 
-                                <p>For those who crave homemade flavors on a daily
-                                basis, our tiffin service brings you fresh, delicious meals straight to your doorstep.
-                                Enjoy the convenience of healthy, hearty lunches without the hassle of cooking.</p></li>
-                            <li><strong class="animated fadeInUp delay-3s">🍽️ Authentic Pakistani Food</strong>
-                                <p>Indulge in a wide range of dishes, from
-                                aromatic biryanis and succulent
-                                kebabs to flavorful
-                                curries and delightful desserts. Each bite tells a story, inspired by the rich culinary
-                                heritage of Pakistan.</p></li>
-                            <li><strong class="animated fadeInUp delay-4s">🍽️ Registered Kitchen</strong> 
-                                <p>Safety and quality are our top priorities. Our
-                                fully registered kitchen meets all health and safety standards, ensuring that every meal
-                                you enjoy is not only delicious but also prepared with the utmost care and hygiene.</p>
-                            </li>
-                        </ul>
+                    <h2 style="color:#3f3d3d;">What We Offer</h2>
+                    <ul class="list-unstyled">
+                        <li><strong class="animated fadeInUp delay-1s">🍽️ Catering</strong> 
+                            <p>Whether it's a wedding, birthday, or corporate event, our catering services are tailored to
+                            make your special occasions unforgettable. We offer customizable menus to suit your needs, ensuring every guest experiences the best of Pakistani cuisine.</p>
+                        </li>
+                        <li><strong class="animated fadeInUp delay-2s">🍽️ Tiffin Services</strong> 
+                            <p>For those who crave homemade flavors on a daily
+                            basis, our tiffin service brings you fresh, delicious meals straight to your doorstep.
+                            Enjoy the convenience of healthy, hearty lunches without the hassle of cooking.</p>
+                        </li>
+                        <li><strong class="animated fadeInUp delay-3s">🍽️ Authentic Pakistani Food</strong>
+                            <p>Indulge in a wide range of dishes, from aromatic biryanis and succulent kebabs to flavorful
+                            curries and delightful desserts. Each bite tells a story, inspired by the rich culinary
+                            heritage of Pakistan.</p>
+                        </li>
+                        <li><strong class="animated fadeInUp delay-4s">🍽️ Registered Kitchen</strong> 
+                            <p>Safety and quality are our top priorities. Our fully registered kitchen meets all health and safety standards, ensuring that every meal you enjoy is not only delicious but also prepared with the utmost care and hygiene.</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-lg-6 my-5">
-                <img src="{% static 'images/logo.png' %}" class="d-block w-100 h-50 blurred-bg" alt="...">
-                <img src="{% static 'images/chicken_biriyani_product_image.png' %}"
-                    class="d-block w-100 h-50 blurred-bg" alt="...">
+            <!-- Image Section -->
+            <div class="col-lg-6 col-md-12 my-4">
+                <img src="{% static 'images/logo.png' %}" class="d-block w-100 mb-3 rounded" alt="KararaEats Logo">
+                <img src="{% static 'images/chicken_biriyani_product_image.png' %}" class="d-block w-100 rounded" alt="Chicken Biryani">
             </div>
         </div>
     </div>
-    
 </section>
 
-
 <style>
+    /* Styling for the about section */
     .about-section {
-        height: auto;
-        background-color: rgb(245, 220, 205);
-        /* Remove fixed height */
+        background-color: rgb(245, 220, 205); /* Light peach background */
+        padding: 30px;
     }
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
+    /* Responsive images */
+    .about-section img {
+        object-fit: cover;
+    }
+
+    /* Heading Styles */
+    .MainHeadline {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    h2 {
+        color: #3f3d3d;
+        font-size: 1.5rem;
     }
 
     .animated.fadeInUp {
@@ -98,6 +92,7 @@
         animation-duration: 1s;
     }
 
+    /* Delayed fadeInUp for animation effect */
     .animated.fadeInUp.delay-1s {
         animation-delay: 1s;
     }
@@ -109,9 +104,56 @@
     .animated.fadeInUp.delay-3s {
         animation-delay: 3s;
     }
+
     .animated.fadeInUp.delay-4s {
         animation-delay: 4s;
     }
 
+    /* Spacing for the list items */
+    ul li {
+        margin-bottom: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .about-section {
+            padding: 20px 15px;
+        }
+
+        .text-content h1 {
+            font-size: 1.6rem;
+        }
+
+        .text-content h2 {
+            font-size: 1.3rem;
+        }
+
+        /* Ensure images scale properly on smaller screens */
+        .about-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Adjusting text sizes */
+        .MainHeadline {
+            font-size: 1.8rem;
+        }
+
+        /* Reducing padding and margins for mobile */
+        .about-section .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    /* List Styling */
+    ul li {
+        font-size: 1rem;
+    }
+
+    .list-unstyled li {
+        margin-bottom: 15px;
+    }
 </style>
+
 {% endblock %}

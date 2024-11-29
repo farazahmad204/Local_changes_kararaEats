@@ -6,59 +6,110 @@
 {% block title %}Registration Form{% endblock %}
 
 {% block content %}
-<!--********************* *********************  Registration Form  *******************************************************-->
+<!-- ********************* Registration Form ******************************************************* -->
+<div class="container bg-white shadow-md p-4 form-layout border" style="background-color: #efbdbd; max-width: 500px; margin-top: 50px;">
+  <h3 class="text-center animated slideInUp MainHeadline mb-4">Create Your Account</h3>
 
-
-  <div class="container bg-white shadow-md p-5 form-layout w-50 w-70-sm border">
-
-    <h3 class="text-center animated slideInUp"> <span class="MainHeadline">Create your account</span> </h3>
-
-    <form method="POST" autocomplete="off" class="animated fadeInUp">
+  <form method="POST" autocomplete="off" class="animated fadeInUp">
 
       {% csrf_token %}
 
-      {{form.username|as_crispy_field}}
-
-      <br> <br>
-
-      {{form.email|as_crispy_field}}
-
-      <br> <br>
-
-
-      {{form.whatsapp_num|as_crispy_field}}
-
-      <br> <br>
-
-      {{form.address|as_crispy_field}}
-
-      <br> <br>
-
-
-      {{form.password1|as_crispy_field}}
-
-      <br> <br>
-
-
-      {{form.password2|as_crispy_field}}
-
-
-      <br> <br>
-      
-      <button type="submit" class="btn btn-primary navbar-btn text-white w-100 w-70-sm p-2"> &nbsp; Create account </button>
-
-      <br> <br>
-
-      <div class="text-center">
-
-          <a href="{% url 'login' %}"> Already have an account? </a>
-
+      <!-- Username Field -->
+      <div class="form-group">
+          {{ form.username|as_crispy_field }}
       </div>
 
+      <!-- Email Field -->
+      <div class="form-group">
+          {{ form.email|as_crispy_field }}
+      </div>
+
+      <!-- WhatsApp Number Field -->
+      <div class="form-group">
+          {{ form.whatsapp_num|as_crispy_field }}
+      </div>
+
+      <!-- Address Field -->
+      <div class="form-group">
+          {{ form.address|as_crispy_field }}
+      </div>
+
+      <!-- Password1 Field -->
+      <div class="form-group">
+          {{ form.password1|as_crispy_field }}
+      </div>
+
+      <!-- Password2 Field -->
+      <div class="form-group">
+          {{ form.password2|as_crispy_field }}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block p-2">Create Account</button>
+      </div>
+
+      <!-- Already have an account link -->
+      <div class="text-center mt-3">
+          <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+      </div>
 
   </form>
+</div>
 
-  </div>
+<!-- Optional: Custom CSS for better responsiveness -->
+<style>
+  /* Styling for the form container */
+  .form-layout {
+      background-color: #efbdbd; /* Light pinkish background */
+      border-radius: 10px; /* Rounded corners for form */
+      padding: 20px;
+      margin-top: 50px; /* Space from top for better alignment */
+  }
+
+  .form-layout .btn {
+      padding: 12px;
+      font-size: 16px;
+  }
+
+  .form-layout h3 {
+      font-size: 1.8rem; /* Slightly larger font for the heading */
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+      .form-layout {
+          padding: 20px 15px;
+          width: 100%; /* Full width on smaller screens */
+      }
+
+      .form-layout h3 {
+          font-size: 1.5rem;
+      }
+
+      .form-layout .btn {
+          padding: 10px;
+      }
+  }
+
+  /* Add spacing between fields */
+  .form-group {
+      margin-bottom: 20px;
+  }
+
+  .form-group input {
+      width: 100%; /* Make sure input fields take full width */
+  }
+
+  .text-center a {
+      color: #007bff;
+  }
+
+  .text-center a:hover {
+      text-decoration: underline;
+  }
+</style>
+
 
 
 {% endblock %}

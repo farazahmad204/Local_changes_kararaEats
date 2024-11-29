@@ -11,17 +11,16 @@
     <p class="text-center mt-4 animated fadeInUp text-white">Your order has been placed successfully!</p>
     <hr>
 
-
-   <div class="order-details animated fadeInUp d-flex justify-content-between">
-    <div>
-        <p class="custom-font-local fa-solid"><strong>Delivery Option:</strong> <span class="custom-font-local fa-solid">{{ delivery_option }}</span></p>
-        <br>
-        <p class="custom-font-local fa-solid"><strong>Delivery Fee:</strong> AU$ {{ delivery_fee }}</p>
+    <div class="order-details animated fadeInUp d-flex flex-column flex-md-row justify-content-between">
+        <div class="mb-3 mb-md-0">
+            <p class="custom-font-local fa-solid"><strong>Delivery Option:</strong> <span class="custom-font-local fa-solid">{{ delivery_option }}</span></p>
+            <br>
+            <p class="custom-font-local fa-solid"><strong>Delivery Fee:</strong> AU$ {{ delivery_fee }}</p>
+        </div>
+        <p class="custom-font-local fa-solid"><strong>Total Amount:</strong> <strong>AU$ {{ final_total }}</strong></p>
     </div>
-    <p class="custom-font-localfa-solid"><strong>Total Amount:</strong> <strong>AU$ {{ final_total }}</strong></p>
-</div>
 
-<div class="order-details animated fadeInUp">
+    <div class="order-details animated fadeInUp">
         <h4 class="mt-4">Ordered Items</h4>
         <ul class="list-group animated fadeInUp">
             {% for menu, items in ordered_menus.items %}
@@ -58,10 +57,10 @@
 </div>
 
 <div class="row mt-4 justify-content-center">
-    <div class="col-md-4 mb-4 animated fadeInUp delay-2s">
-      <a href="{% url 'WeeklyMenu' %}" class="btn btn-primary btn-lg btn-block shadow-lg">New Order</a>
+    <div class="col-12 col-md-4 mb-4 animated fadeInUp delay-2s">
+        <a href="{% url 'WeeklyMenu' %}" class="btn btn-primary btn-lg btn-block shadow-lg">New Order</a>
     </div>
-  </div>
+</div>
 
 <!-- Custom CSS for animation and styling -->
 <style>
@@ -72,8 +71,7 @@
 
     .custom-font-local {
         font-family: 'Poppins', Cursive, Monospace, Fantasy, Sans-serif, Serif;
-        /* Change to your desired font */
-        font-size: 1.0em;
+        font-size: 1em;
     }
 
     .order-details {
@@ -95,6 +93,40 @@
 
     .list-group-item strong {
         color: #fb3310;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .order-details {
+            padding: 15px;
+        }
+
+        .custom-font-local {
+            font-size: 0.9em;
+        }
+
+        .list-group-item h4 {
+            font-size: 1.1rem;
+        }
+        
+        .list-group-item strong {
+            font-size: 1.2rem;
+        }
+
+        .img-thumbnail {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .order-details {
+            padding: 18px;
+        }
+
+        .custom-font-local {
+            font-size: 1em;
+        }
     }
 </style>
 
