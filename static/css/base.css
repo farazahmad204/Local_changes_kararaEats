@@ -55,3 +55,19 @@ h1,
             }
         }
 
+/* Ensure custom font size on smaller screens */
+@media (max-width: 576px) {
+    .custom-font {
+        font-size: 14px; /* Adjust size as necessary */
+    }
+    .custom-font-brand {
+        font-size: 16px; /* Adjust size for the brand link */
+    }
+}
+
+/* Larger screen adjustments */
+@media (min-width: 992px) {
+    .custom-font {
+        font-size: 18px; /* Adjust size for larger screens */
+    }
+}

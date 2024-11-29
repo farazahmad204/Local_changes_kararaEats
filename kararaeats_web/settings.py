@@ -176,6 +176,8 @@ EMAIL_HOST_PASSWORD = 'tlmmwdytjhnuvxot'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
+# Customize email message content
+PASSWORD_RESET_EMAIL_HTML_TEMPLATE = 'accounts/password_reset_email.html'
 
 # Optional: Enable debug output
 EMAIL_DEBUG = True

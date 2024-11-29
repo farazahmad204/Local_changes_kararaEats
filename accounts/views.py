@@ -6,6 +6,12 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm
 
 
+from django.contrib.auth.views import PasswordResetDoneView,PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
+from django.shortcuts import redirect
+
+from django.urls import reverse_lazy
+
+
 class RegisterView(FormView):
     template_name = 'accounts/register.html'
     form_class = CustomUserCreationForm
@@ -39,3 +45,43 @@ class CustomLoginView(LoginView):
         if self.request.user.username == 'fahm':  # Replace 'special_user' with the specific username
             return reverse('display_menu')
         return reverse('WeeklyMenu')  # display_menu_user Redirect to the default home page
+
+
+
+    
+
+
+
+class CustomPasswordResetView(PasswordResetView):
+    # You can customize the form class or template here
+    template_name = 'accounts/custom_password_reset_form.html'  # Your custom form template
+    email_template_name = 'accounts/custom_password_reset_email.html'  # Your custom email template
+    subject_template_name = 'accounts/custom_password_reset_subject.txt'  # Optional: Custom subject
+
+    # Optionally, override the success URL to redirect after the form submission
+    success_url = reverse_lazy('login')  # Redirect here after form submission
+
+
+
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    def get_redirect_url(self):
+        # Redirect the user to the home page or any other URL after the reset email is sent
+        return reverse_lazy('login')  # 'home' is the name of your home page URL
+    
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    # You can customize the template here if you wish
+    template_name = 'accounts/custom_password_reset_confirm.html'  # Your custom confirm template
+    
+    # Optionally, override form validation or other behaviors
+    success_url = reverse_lazy('password_reset_complete')  # Redirect here after password reset
+
+
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'accounts/custom_password_reset_complete.html'  # Your custom complete template
+
+
+
