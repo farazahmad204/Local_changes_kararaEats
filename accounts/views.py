@@ -59,12 +59,16 @@ class CustomPasswordResetView(PasswordResetView):
     subject_template_name = 'accounts/custom_password_reset_subject.txt'  # Optional: Custom subject
 
     # Optionally, override the success URL to redirect after the form submission
-    success_url = reverse_lazy('login')  # Redirect here after form submission
+    success_url = reverse_lazy('password_reset_done')  # Redirect here after form submission
 
 
 
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
+
+
+    template_name = 'accounts/password_reset_done.html'  # Your custom confirm template
+
     def get_redirect_url(self):
         # Redirect the user to the home page or any other URL after the reset email is sent
         return reverse_lazy('login')  # 'home' is the name of your home page URL
