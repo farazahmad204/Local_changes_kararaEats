@@ -65,7 +65,43 @@
         background-color:none; 
         padding: 20px;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+
         }
+
+
+        .tabs {
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .tab-button {
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s;
+        width: 100%;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    .tab-button:hover {
+        background-color: hsl(22, 92%, 45%);
+        transform: scale(1.05);
+    }
+
+    .active {
+        background-color: hsl(22, 92%, 45%);
+        color: white;
+        font-weight: bold;
+        transform: scale(1.05);
+    }
+
     /* General Menu Styling */
     .menu-items {
         display: flex;
@@ -80,30 +116,6 @@
         display: flex;
         justify-content: center;
         transition: all 0.3s ease;
-    }
-
-    .card {
-        width: 100%;
-        height: 100%;
-    }
-
-    .card img {
-        height: 150px;
-        object-fit: cover;
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .card {
-        transition: box-shadow 0.3s;
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
     }
 
     .form-check {
@@ -124,40 +136,7 @@
         font-family: Sans-serif, Serif;
         font-size: 1.6em;
     }
-
-    .tabs {
-        padding: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .tab-button {
-        margin: 0 5px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s, transform 0.2s;
-        width: 100%;
-        padding: 15px;
-        text-align: left;
-        font-size: 1.2em;
-    }
-
-    .tab-button:hover {
-        background-color: hsl(22, 92%, 45%);
-        transform: scale(1.05);
-    }
-
-    .active {
-        background-color: hsl(22, 92%, 45%);
-        color: white;
-        font-weight: bold;
-        transform: scale(1.05);
-    }
-
+    
     /* Responsive Styles */
     @media (max-width: 1200px) {
         .menu-item {
@@ -188,7 +167,7 @@
         background-color: #007bff;
         color: white;
         border: none;
-        border-radius: 2px;
+        border-radius: 1px;
         transition: background-color 0.3s, transform 0.2s;
         width: 19%;
         padding: 15px;
@@ -224,25 +203,43 @@
 
     @media (max-width: 480px) {
         .sidebar {
-            width: 500px;
+            width: 400px;
             padding: 15px;
             box-shadow: none;
             margin-top: 20px;
             background-color:none;
         }
+        .tabs {
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1000;
+        display:flex; 
+        flex-direction: column;
+        align-items: center;
+        
+    }
+        .tab-button {
+        margin: 0 px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        transition: background-color 0.3s, transform 0.2s;
+        width: 19%;
+        padding: 5px;
+        text-align: center;
+        font-size:0.8em;
+
+    }
+    
         .menu-item {
             flex: 0 1 100%;
             margin: 10px 0;
         }
 
-        .tabs {
-            padding: 5px;
-        }
+       
 
-        .tab-button {
-            font-size: 0.9em;
-            padding: 8px;
-        }
+     
 
         .menu-items {
             flex-direction: column;
@@ -255,6 +252,7 @@
         .item-image {
             flex: 1;
         }
+
     }
 </style>
 
@@ -264,14 +262,15 @@
      <!-- Sidebar for Menu Names -->
      <div class="sidebar">
         <!-- On small screens, show dropdown button instead of tabs -->
-        <div class="tabs bg-white text-center" style="display:flexbox;">
-            <span style="font-size: 1.2em; font-weight: bold; color: #333;">Menu Of the Week</span>
+        <div class="tabs bg-white text-center">
+            <span style="font-size: 1em; font-weight: bold; color: #333;">Menu Of the Week</span>
             <div id="menuOptions" class="menu-options">
                 {% for menu in menus %}
                     <button class="tab-button" onclick="showMenu('{{ menu.name }}')">{{ menu.name }}</button>
                 {% endfor %}
             </div>
         </div>
+        
     </div>
 
     <!-- Main Content Area -->
