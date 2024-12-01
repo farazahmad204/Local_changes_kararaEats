@@ -61,21 +61,20 @@
   <style>
 
     .sidebar {
-        width: 250px;
+        width: 300px;
         background-color:none;
         padding: 20px;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-
+      
         }
 
-
-        .tabs {
-        padding: 10px;
+    .tabs {
+        padding: 30px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         position: sticky;
         top: 0;
         z-index: 1000;
-    }
+        }
 
     .tab-button {
         margin: 0 5px;
@@ -207,7 +206,7 @@
             padding: 15px;
             box-shadow: none;
             margin-top: 20px;
-            background-color:none;
+            background-color:white;
         }
         .tabs {
         padding: 10px;
@@ -216,7 +215,7 @@
         z-index: 1000;
         display:flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
 
     }
         .tab-button {
@@ -230,6 +229,12 @@
         text-align: center;
         font-size:0.8em;
 
+    }
+    .active {
+        background-color: hsl(22, 92%, 45%);
+        color: white;
+        font-weight: bold;
+        transform: scale(1.05);
     }
 
         .menu-item {
@@ -264,9 +269,9 @@
         <!-- On small screens, show dropdown button instead of tabs -->
         <div class="tabs bg-white text-center">
             <span style="font-size: 1em; font-weight: bold; color: #333;">Menu Of the Week</span>
-            <div id="menuOptions" class="menu-options">
+            <div id="menuOptions" class="mt-md-2">
                 {% for menu in menus %}
-                    <button class="tab-button" onclick="showMenu('{{ menu.name }}')">{{ menu.name }}</button>
+                    <button class="tab-button mt-md-2" onclick="showMenu('{{ menu.name }}')">{{ menu.name }}</button>
                 {% endfor %}
             </div>
         </div>
