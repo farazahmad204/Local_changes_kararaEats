@@ -4,24 +4,28 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="display-4 text-center animated fadeInUp">Create New Menu</h2>
+    <h2 class="text-center text-white fw-bold display-5 animated fadeInUp">Create New Menu</h2>
 
     <div class="row justify-content-center mt-4">
         <div class="col-md-8">
-            <form method="post">
+            <form method="post" class="bg-dark p-4 rounded shadow-lg">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="id_name">Menu Name</label>
-                    {{ form.name }}
+                <div class="form-group mb-4">
+                    <label for="id_name" class="form-label text-uppercase text-white-50">Menu Name</label>
+                    <input type="text" id="id_name" name="name" class="form-control bg-secondary text-white border-0 shadow-sm" placeholder="Enter menu name" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="id_food_items">Select Food Items</label>
-                    {{ form.food_items }}
+                <div class="form-group mb-4">
+                    <label class="form-label text-uppercase text-white-50">Select Food Items</label>
+                    <div class="p-3 rounded bg-secondary">
+                        {{ form.food_items }}
+                    </div>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success btn-lg shadow-lg animated pulse infinite">Create Menu</button>
+                    <button type="submit" class="btn btn-success btn-lg shadow-lg animated pulse infinite">
+                        Create Menu
+                    </button>
                 </div>
             </form>
         </div>
@@ -29,17 +33,18 @@
 </div>
 
 <style>
-    body
-    {
-        background-image: none;
+
+    .text-white-50 {
+        color: rgba(255, 255, 255, 0.75) !important;
     }
+
     .btn {
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
 
     .btn:hover {
         transform: scale(1.1);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
     }
 
     .pulse {
@@ -56,6 +61,26 @@
         100% {
             transform: scale(1);
         }
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .form-control {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+    }
+
+    .bg-dark {
+        background-color: #2c3e50 !important;
+    }
+
+    .rounded {
+        border-radius: 10px !important;
     }
 </style>
 {% endblock %}

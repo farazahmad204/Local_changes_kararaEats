@@ -1,15 +1,19 @@
-<!-- accounts/login.html -->
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-
 <!--********************* *********************  Login Form  *******************************************************-->
-
-<div class="container bg-white shadow-md p-4 form-layout border" style="background-color: #efbdbd; max-width: 500px; margin-top: 50px;">
-    <h3 class="text-center MainHeadline mb-4">Login to Your Account</h3>
+<div class="container shadow-md p-4 form-layout border"
+    style="background-image: url('/static/images/login_background.jpg');
+           background-size: cover;
+           background-repeat: no-repeat;
+           background-position: center;
+           max-width: 500px;
+           margin-top: 50px;
+           background-color: transparent;">
+    <h3 class="text-center MainHeadline mb-4" style="color: white;">Login to Your Account</h3>
     <hr>
     <br>
 
@@ -29,7 +33,10 @@
 
         <!-- Submit Button -->
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block p-2"> 
+            <button type="submit" class="btn btn-block p-2"
+                style="background: linear-gradient(to right, black, grey); color: white; border: white; font-size: 16px;
+                       background-image: url('/static/images/button_back.jpg'); background-size: cover;
+                       background-repeat: no-repeat; background-position: center;">
                 <i class="fa fa-key" aria-hidden="true"></i> &nbsp; Login
             </button>
         </div>
@@ -41,9 +48,9 @@
 
         <!-- Forgot password and Register Links -->
         <div class="text-center">
-            <p class="mt-3">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+            <p class="mt-3" style="color: white; font-weight: bold;">Don't have an account? <a href="{% url 'register' %}" class="link-style">Register here</a></p>
             <!-- Forgot password link -->
-            <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+            <p><a href="{% url 'password_reset' %}" class="link-style">Forgot your password?</a></p>
         </div>
     </form>
 </div>
@@ -52,7 +59,7 @@
 <style>
     /* Ensure the container is responsive and looks good on mobile screens */
     .form-layout {
-        background-color: #efbdbd; /* Light pinkish background */
+        background-color: rgba(239, 189, 189, 0.8); /* Transparent overlay for readability */
         border-radius: 10px; /* Rounded corners for form */
         padding: 20px;
     }
@@ -89,6 +96,22 @@
 
     .form-group input {
         width: 100%; /* Make sure input fields take full width */
+    }
+
+    /* Styling for username and password text */
+    .form-group label {
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Custom link styles for Register and Forgot Password */
+    .link-style {
+        color: #007bff; /* Default link color */
+    }
+
+    .link-style:hover {
+        text-decoration: underline;
+        color: #0056b3; /* Darker color on hover */
     }
 
     .text-center a {

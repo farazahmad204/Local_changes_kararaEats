@@ -26,7 +26,7 @@
 <style>
     body
     {
-        background-image: url('{% static "images/banner_image_2.webp" %}');
+        background-image: url('{% static "images/background_image.webp" %}');
     }
 </style>
     <!-- Custom CSS for animations and styling -->
@@ -229,28 +229,20 @@
         {% endblock %}
    
 
-<!-- ********************* Footer ****************************************************************************-->
-<div class="container-fluid text-bg-secondary p-3 mt-3 border bg-dark text-light">
+ <!-- ********************* Footer ****************************************************************************-->
+
+ <div class="container-fluid mt-5 text-bg-secondary p-3 border bg-dark text-light">
     <div class="row">
-        <div class="col-12 col-sm-12 text-center mb-3">
-            <p class="highlight custom-font">
+        <div class="col-lg-12 text-center">
+            <p class="highlight text-center custom-font">
                 <strong>Join us at <a href="{% url 'WeeklyMenu' %}" class="navbar-brand custom-font-brand">
                     <span class="text-danger">KararaEats</span>
-                </a> and embark on a flavorful journey through the heart of South Asia.</strong>
+                </a>embark on a flavorful journey through the heart of South Asia.</strong>
             </p>
-        </div>
-    </div> 
-    <div class="row">   
-        <div class="col-12 col-sm-12 text-center">
-            <p class="highlight custom-font mb-0"><strong>Call Us on Whatsapp</strong></p>
-            <p>
-                <a class="btn btn-light" href="tel:+61414647491">+61 414 647 491</a>
-            </p>
+            <p class="highlight text-center custom-font"><strong>Call Us on Whatsapp</strong> <a class="btn btn-light" href="tel:+61414647491">+61 414 647 491</a></p>
         </div>
     </div>
 </div>
-
-
  <!-- ********************* End Footer ****************************************************************************-->
   
      <!-- Link Bootstrap JS and jQuery -->

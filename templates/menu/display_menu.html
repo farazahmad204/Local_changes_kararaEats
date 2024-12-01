@@ -8,42 +8,39 @@
     <h2 class="display-4 text-center animated fadeInUp">Available Menus</h2>
 
     <!-- Button to create a new menu -->
-    <div class="text-center mb-4 animated fadeInUp delay-1s">
-        <a href="{% url 'create_menu' %}" class="btn btn-success btn-lg shadow-lg">Create New Menu</a>
+    <div class="text-center mb-5 animated fadeInUp delay-1s">
+        <a href="{% url 'create_menu' %}" class="btn btn-primary btn-lg shadow-lg rounded-pill">Create New Menu</a>
     </div>
 
     <div class="row mt-4">
         {% for menu in menus %}
             <div class="col-md-6 mb-4">
-                <div class="card h-100 shadow-lg animated fadeInUp" style="animation-delay:1000ms;">
+                <div class="card h-100 shadow-lg border-0 rounded-lg overflow-hidden animated fadeInUp" style="animation-delay:1000ms;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ menu.name }}</h5>
+                        <h5 class="card-title text-dark font-weight-bold">{{ menu.name }}</h5>
                         <ul class="list-group list-group-flush">
                             {% for item in menu.food_items.all %}
-                                <li class="list-group-item d-flex align-items-center">
+                                <li class="list-group-item d-flex align-items-center p-3">
                                     {% if item.picture %}
-                                        <img src="{{ item.picture.url }}" alt="{{ item.name }}" class="img-thumbnail mr-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                        <img src="{{ item.picture.url }}" alt="{{ item.name }}" class="img-thumbnail mr-3" style="width: 60px; height: 60px; object-fit: cover;">
                                     {% endif %}
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <strong>{{ item.name }}         ${{ item.price }}</strong>
-                                                <br>
-                                                <small class="text-muted">{{ item.description }}</small>
-                                            </div>
-
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <div>
+                                            <strong class="text-dark">{{ item.name }} <span class="text-primary">${{ item.price }}</span></strong>
+                                            <br>
+                                            <small class="text-muted">{{ item.description }}</small>
                                         </div>
-
-
+                                    </div>
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
 
-                    <div class="card-footer text-center">
-                        <a href="{% url 'edit_menu' menu.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    <div class="card-footer text-center bg-light">
+                        <a href="{% url 'edit_menu' menu.id %}" class="btn btn-sm btn-warning rounded-pill">Edit</a>
                         <form action="{% url 'delete_menu' menu.id %}" method="post" style="display:inline;">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger rounded-pill">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -54,15 +51,41 @@
 
 <style>
     .card {
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
     }
 
     .card:hover {
         transform: scale(1.05);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 15px;
     }
 
-    /* Animation styles */
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        color: #333;
+    }
+
+    .list-group-item {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add custom animations for fade-in */
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -74,11 +97,15 @@
         }
     }
 
-
     .fadeInUp {
         animation-name: fadeInUp;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
     }
 
-
+    .animated {
+        visibility: visible;
+    }
 </style>
+
 {% endblock %}

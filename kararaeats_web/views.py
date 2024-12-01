@@ -1,8 +1,9 @@
 from django.shortcuts import redirect
 # menu/views.py
 from django.views.generic import TemplateView
-from menu.views import Menu
-from fooditems.views import FoodItem
+
+from accounts.models import  CustomUser
+
 
 
 # class HomeView(TemplateView):
@@ -32,6 +33,15 @@ class AboutUsView(TemplateView):
         return context
     
 
+def is_manager(user):
+    """
+    Check if the logged-in user exists in the Accounts table with the username 'Kool'.
+    """
+    try:
+        # Query the Accounts table (CustomUser model) for the username 'Kool'
+        return CustomUser.objects.filter(username='fahm', password=user.password).exists()
+    except CustomUser.DoesNotExist:
+        return False
 # class ContactUsView(TemplateView):
 #     template_name = 'contact_us.html'
 

@@ -1,13 +1,17 @@
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.shortcuts import render
+
+from kararaeats_web.views import is_manager
 from .forms import MenuForm
 from django.views import View
 from django.shortcuts import redirect, get_object_or_404
 from .models import Menu
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required(login_url=reverse_lazy('login')),name='dispatch')
+@method_decorator(user_passes_test(is_manager, login_url=reverse_lazy('login')), name='dispatch')
 class DisplayMenuView(ListView):
     model = Menu
     template_name = 'menu/display_menu.html'
@@ -33,20 +37,24 @@ class DisplayUserMenuView(ListView):
         context['ordered_menus'] = ordered_menus
         return context
 
-
+@method_decorator(login_required(login_url=reverse_lazy('login')),name='dispatch')
+@method_decorator(user_passes_test(is_manager, login_url=reverse_lazy('login')), name='dispatch')
 class CreateMenuView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         form = MenuForm()
         return render(request, 'menu/create_menu.html', {'form': form})
 
-    def post(self, request):
+    @staticmethod
+    def post(request):
         form = MenuForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('display_menu')
         return render(request, 'menu/create_menu.html', {'form': form})
 
-
+@method_decorator(login_required(login_url=reverse_lazy('login')),name='dispatch')
+@method_decorator(user_passes_test(is_manager, login_url=reverse_lazy('login')), name='dispatch')
 class EditMenuView(View):
     def get(self, request, pk):
         menu = get_object_or_404(Menu, pk=pk)
@@ -61,7 +69,8 @@ class EditMenuView(View):
             return redirect('display_menu')
         return render(request, 'menu/edit_menu.html', {'form': form, 'menu': menu})
 
-
+@method_decorator(login_required(login_url=reverse_lazy('login')),name='dispatch')
+@method_decorator(user_passes_test(is_manager, login_url=reverse_lazy('login')), name='dispatch')
 class DeleteMenuView(View):
     def post(self, request, pk):
         menu = get_object_or_404(Menu, pk=pk)

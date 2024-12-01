@@ -8,11 +8,11 @@
 
 {% if user.is_authenticated %}
 
-{% if user.username == 'fahm' %} 
+{% if user.username == 'fahm' %}
 
  <h2 class="display-4 text-center fadeInUp"><strong><span class="MainHeadline">Explore Our Menus</span></strong></h2>
 <p class="text-center mb-5 custom-font text-light "><strong>Select your favorite items and place an order in just a
-        few clicks! </strong> </p> 
+        few clicks! </strong> </p>
         {% endif %}
         {% endif %}
 
@@ -62,7 +62,7 @@
 
     .sidebar {
         width: 250px;
-        background-color:none; 
+        background-color:none;
         padding: 20px;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 
@@ -136,7 +136,7 @@
         font-family: Sans-serif, Serif;
         font-size: 1.6em;
     }
-    
+
     /* Responsive Styles */
     @media (max-width: 1200px) {
         .menu-item {
@@ -214,10 +214,10 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         position: relative;
         z-index: 1000;
-        display:flex; 
+        display:flex;
         flex-direction: column;
         align-items: center;
-        
+
     }
         .tab-button {
         margin: 0 px;
@@ -231,15 +231,15 @@
         font-size:0.8em;
 
     }
-    
+
         .menu-item {
             flex: 0 1 100%;
             margin: 10px 0;
         }
 
-       
 
-     
+
+
 
         .menu-items {
             flex-direction: column;
@@ -270,7 +270,7 @@
                 {% endfor %}
             </div>
         </div>
-        
+
     </div>
 
     <!-- Main Content Area -->
@@ -278,20 +278,20 @@
 
         <form id="orderForm" method="post" action="{% url 'order_items' %}">
             {% csrf_token %}
-            
+
             <div id="menuContent" class="mt-1">
                 {% for menu in menus %}
                 <div id="{{ menu.name }}" class="menu-section" style="display: none; background-color: white; padding: 20px; border-radius: 0px;">
                     <input type="hidden" name="menu_id" value="{{ menu.id }}">
                     <span class="nav-link display-4 text-center fadeInUp custom-font-Menu" style="font-size: 2em; font-weight: bold; color: #333;">{{ menu.name }}</span>
-                    
+
                      <!-- Submit button -->
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
                             <i class="fas fa-shopping-cart"></i> Order Selected Items
                         </button>
                     </div>
-            
+
                     <div class="menu-items" style="margin-top: 20px;">
 
                         {% for item in menu.food_items.all %}
@@ -308,7 +308,7 @@
                                     <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
                                     <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
                                            name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
-                                           class="form-control item-quantity" value="0" placeholder="Qty" 
+                                           class="form-control item-quantity" value="0" placeholder="Qty"
                                            style="width: 70px; display: inline-block; margin-top: 10px;">
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
                             <!-- Item Image on the Right -->
                             <div class="item-image" style="flex: 1; padding-left: 15px; text-align: right;">
                                 {% if item.picture %}
-                                    <img class="img-fluid" alt="{{ item.name }}" src="{{ item.picture.url }}" 
+                                    <img class="img-fluid" alt="{{ item.name }}" src="{{ item.picture.url }}"
                                          style="height: 100px; width: 100px; object-fit: cover; border-radius: 10px;">
                                 {% endif %}
                             </div>
