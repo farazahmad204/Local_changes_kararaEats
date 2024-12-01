@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% load crispy_forms_tags %}
 
 {% block content %}
 
 <!--********************* *********************  Login Form  *******************************************************-->
-<div class="container shadow-md p-4 form-layout border"
-    style="background-image: url('/static/images/login_background.jpg');
-           background-size: cover;
-           background-repeat: no-repeat;
-           background-position: center;
-           max-width: 500px;
-           margin-top: 50px;
-           background-color: transparent;">
-    <h3 class="text-center MainHeadline mb-4" style="color: white;">Login to Your Account</h3>
+<div class="container shadow-md p-4 form-layout border form-background">
+    <h3 class="text-center mb-4" style="color: white;">Login to Your Account</h3>
     <hr>
     <br>
 
@@ -33,10 +28,7 @@
 
         <!-- Submit Button -->
         <div class="form-group">
-            <button type="submit" class="btn btn-block p-2"
-                style="background: linear-gradient(to right, black, grey); color: white; border: white; font-size: 16px;
-                       background-image: url('/static/images/button_back.jpg'); background-size: cover;
-                       background-repeat: no-repeat; background-position: center;">
+            <button type="submit" class="btn btn-block p-2 fancy-btn">
                 <i class="fa fa-key" aria-hidden="true"></i> &nbsp; Login
             </button>
         </div>
@@ -57,36 +49,12 @@
 
 <!-- Optional: Custom CSS for better responsiveness -->
 <style>
-    /* Ensure the container is responsive and looks good on mobile screens */
-    .form-layout {
-        background-color: rgba(239, 189, 189, 0.8); /* Transparent overlay for readability */
-        border-radius: 10px; /* Rounded corners for form */
-        padding: 20px;
+    .form-background
+    {
+        background-image: url('/static/images/login_background.jpg');
     }
-
-    .form-layout .btn {
-        padding: 12px;
-        font-size: 16px;
-    }
-
-    .form-layout h3 {
-        font-size: 1.8rem; /* Slightly larger font for the heading */
-    }
-
-    /* Responsive adjustments for smaller screens */
-    @media (max-width: 768px) {
-        .form-layout {
-            padding: 20px 15px;
-            width: 100%; /* Full width on smaller screens */
-        }
-
-        .form-layout h3 {
-            font-size: 1.5rem;
-        }
-
-        .form-layout .btn {
-            padding: 10px;
-        }
+    .fancy-btn {
+        background-image: url('/static/images/button_back.jpg');
     }
 
     /* Add spacing between fields */
@@ -95,7 +63,8 @@
     }
 
     .form-group input {
-        width: 100%; /* Make sure input fields take full width */
+        width: 100%;
+        /* Make sure input fields take full width */
     }
 
     /* Styling for username and password text */
@@ -106,20 +75,25 @@
 
     /* Custom link styles for Register and Forgot Password */
     .link-style {
-        color: #007bff; /* Default link color */
+        color: #007bff;
+        /* Default link color */
     }
 
     .link-style:hover {
         text-decoration: underline;
-        color: #0056b3; /* Darker color on hover */
+        color: #0056b3;
+        /* Darker color on hover */
     }
 
+    /* Styling for the form container */
     .text-center a {
-        color: #2c2e30;
+        color: #adb2b7;
+
     }
 
     .text-center a:hover {
         text-decoration: underline;
+        color: #0e74db;
     }
 </style>
 

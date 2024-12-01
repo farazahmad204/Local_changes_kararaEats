@@ -17,12 +17,20 @@
 
 .btn:hover {
     transform: scale(1.15);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 24px rgba(251, 248, 248, 0.3);
 }
 
-.fancy-btn {
-    transition: background-color 0.3s ease, transform 0.3s ease;
+.fancy-btn
+{
+
+    background: linear-gradient(to right, black, grey); 
+    color: white; 
+    border: white;
+    font-size: 16px;
+    background-size: cover;
+    background-repeat: no-repeat; background-position: center;
 }
+
 
 .fancy-btn:hover {
     background-color: #28a745;
@@ -44,5 +52,14 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.form-background
+{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    max-width: 500px;
+    margin-top: 50px;
+    background-color: transparent;
+}
 
 
