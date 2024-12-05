@@ -69,149 +69,178 @@
 
 
 <style>
-   /* General Styles */
-.form-background {
-    background-image: url('/static/images/login_background.jpg');
-    background-size: cover; /* Ensure background image covers the entire section */
-    background-position: center;
-    background-repeat: no-repeat;
-}
+    /* General Styles */
+    .form-background {
+        background-image: url('/static/images/login_background.jpg');
+        background-size: cover;
+        /* Ensure background image covers the entire section */
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
-/* Fancy button with background */
-.fancy-btn {
-    background-image: url('/static/images/button_back.jpg');
-    background-size:auto;
-    background-repeat: no-repeat;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
+    /* Fancy button with background */
+    .fancy-btn {
+        background-image: url('/static/images/button_back.jpg');
+        background-size: center;
+        background-repeat: no-repeat;
+        padding: 10px 20px;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-/* Profile Container */
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0 15px;
-}
 
-/* Profile Content */
-.profile-details {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
-}
 
-/* Responsive Modal Styles */
-.modal-Profile {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-}
-
-/* modal-Profile Content */
-.modal-Profile-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%; /* Full width for small screens */
-    max-width: 600px; /* Limit the width for larger screens */
-    border-radius: 10px;
-}
-
-/* Close Button */
-.close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Form Styling */
-.form-field {
-    margin-bottom: 15px;
-}
-
-.form-field label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-field input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.form-field button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-field button:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
+    /* Profile Content */
     .profile-details {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    /* Responsive Modal Styles */
+    .modal-Profile {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black background with opacity */
+    }
+
+    /* modal-Profile Content */
+    .modal-Profile-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%;
+        /* Full width for small screens */
+        max-width: 600px;
+        /* Limit the width for larger screens */
+        border-radius: 10px;
+    }
+
+    /* Close Button */
+    .close-btn {
+        color: #aaa;
+        font-size: 50px;
+        font-weight: bold;
+        position: relative;
+        top: 0px;
+        left: auto;
+        cursor: pointer;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Form Styling */
+    .form-field {
         margin-bottom: 15px;
     }
 
-    .modal-Profile-content {
-        width: 95%; /* Ensure it takes almost full width on small screens */
+    .form-field label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
     }
 
-    .form-field input,
+    .form-field input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
     .form-field button {
-        font-size: 14px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
-    .container {
-        padding: 0 10px; /* Add small padding on mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-Profile-content {
-        width: 100%; /* Full width for very small screens */
-        margin: 10% auto;
+    .form-field button:hover {
+        background-color: #0056b3;
     }
 
-    .form-field input,
-    .form-field button {
-        font-size: 12px;
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .profile-details {
+            margin-bottom: 15px;
+        }
+
+        .modal-Profile-content {
+            width: 95%;
+            /* Ensure it takes almost full width on small screens */
+        }
+
+        .form-field input,
+        .form-field button {
+            font-size: 14px;
+        }
+
+        /* Profile Container */
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+            padding: 0 10px;
+            /* Add small padding on mobile */
+        }
     }
 
-    .fancy-btn {
-        padding: 8px 15px;
-        font-size: 14px;
-    }
-}
+    @media (max-width: 480px) {
+        .modal-Profile-content {
+            width: 100%;
+            /* Full width for very small screens */
+            margin: 10% auto;
+        }
 
+        .form-field input,
+        .form-field button {
+            font-size: 12px;
+        }
+
+        .fancy-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* Profile Container */
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+            padding: 0 10px;
+            /* Add small padding on mobile */
+        }
+
+        /* Close Button */
+        .close-btn {
+            color: #aaa;
+            font-size: 50px;
+            font-weight: bold;
+            position: relative;
+            top: 0px;
+            left: auto;
+            cursor: pointer;
+        }
+    }
 </style>
 
 <script>

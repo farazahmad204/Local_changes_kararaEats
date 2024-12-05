@@ -95,6 +95,32 @@
         text-decoration: underline;
         color: #0e74db;
     }
+    /* Style for error list */
+ul.errorlist.nonfield {
+    background-color: white; /* White background for the error list */
+    color: red; /* Red text color for visibility */
+    padding: 10px; /* Add some padding for spacing */
+    border: 1px solid #ddd; /* Light border around the error box */
+    border-radius: 5px; /* Rounded corners */
+    list-style-type: none; /* Remove default list styling */
+    margin: 0; /* Remove default margin */
+}
+
+/* Optional: Style the individual error items */
+ul.errorlist.nonfield li {
+    margin-bottom: 5px; /* Space between each error message */
+}
 </style>
 
+<script>
+        // Wait until the DOM is loaded
+        window.onload = function() {
+            // Check if the error list exists and remove it after page load
+            var errorList = document.getElementsByClassName('errorlist nonfield');
+            if (errorList) {
+                // Hide the error list upon page load
+                errorList.style.display = 'none';
+            }
+        };
+    </script>
 {% endblock %}
