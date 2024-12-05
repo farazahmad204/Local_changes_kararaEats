@@ -28,45 +28,7 @@
     {
         background-image: url('{% static "images/background_image.webp" %}');
     }
-    .logout-btn {
-    color: #fcfafa !important;
-    border-radius: 30px;
-    padding: 10px 10px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border: none;
-    cursor: pointer;
-    background-color: #6a6868;
-    
-}
-
-.logout-btn:hover {
-    color: #625f5f !important;
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(203, 12, 12, 0.2);
-}
-/* Ensure the dropdown doesn't overflow */
-.nav-item.dropdown .dropdown-menu {
-    position: absolute;
-    z-index: 1000;
-    left: 0 !important; /* Ensure it's positioned relative to the parent element */
-    right: auto !important; /* Prevent hiding on the right side */
-    border-radius: 10px; /* Curved edges for the dropdown box */
-}
-/* Optional: Adjust dropdown position if necessary */
-.nav-item.dropdown .dropdown-menu {
-    left: 50%;
-    transform: translateX(-50%); /* Centers the dropdown horizontally */
-}
-   
-  /* Styling for the form container */
-    .text-center a {
-        color: #505153;
-
-    }
-    .text-center a:hover {
-        text-decoration: underline;
-        color: #0e74db;
-    }
+  
 </style>
     <!-- Custom CSS for animations and styling -->
     {% block extra_css %}{% endblock %}
@@ -184,20 +146,10 @@
           </div>
 
           <div class="modal-body bg-light">
+            
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-               
-                {% if user.is_authenticated %}
-
-                {% if user.username == 'fahm' %}
-                <li class="nav-item text-end">
-                    <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
-                </li>
-            {% else %}
-                <li class="nav-item text-end">
-                    <a class="nav-link custom-font" href="{% url 'edit_profile' %}"><i class="fas fa-user-circle" style="font-size: 30px;"></i></a>
-                </li>
-            {% endif %}
                     <!-- Show these links if the user is logged in -->
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link custom-font " href="{% url 'WeeklyMenu' %}" >Menu</a>
                     </li>
@@ -207,12 +159,30 @@
                     <li class="nav-item">
                         <a class="nav-link custom-font" href="{% url 'contact_us' %}">Contact Us</a>
                     </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="logout-btn custom-font">Logout</button>
-                        </form>
-                    </li>
+                     <!-- Show these links if the user is logged in -->
+                {% if user.username == 'fahm' %}
+                <li class="nav-item text-end">
+                    <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
+                </li>
+                {% else %}
+                 <!-- Dropdown Item -->
+                <li class="nav-item dropdown text-start">
+                    <a class="nav-link dropdown-toggle custom-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle" style="font-size: 30px;"></i>&nbsp;&nbsp;{{user.username}}
+                    </a>
+           
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                        <li>
+                            <form method="POST" action="{% url 'logout' %}">
+                             {% csrf_token %}
+                            <button type="submit" class="dropdown-item logout-btn ">Logout</button>
+                            </form>
+                        </li>
+                </ul>
+                </li>
+                {% endif %}
                     {% else %}
                     <!-- Show these links if the user is not logged in -->
                     <li class="nav-item ">

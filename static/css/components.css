@@ -61,5 +61,43 @@
     margin-top: 50px;
     background-color: transparent;
 }
+.logout-btn {
+    color: #fcfafa !important;
+    border-radius: 30px;
+    padding: 10px 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+    background-color: #6a6868;
+    
+}
+.logout-btn:hover {
+    color: #625f5f !important;
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(203, 12, 12, 0.2);
+}
+/* Ensure the dropdown doesn't overflow */
+.nav-item.dropdown .dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    left: 0 !important; /* Ensure it's positioned relative to the parent element */
+    right: auto !important; /* Prevent hiding on the right side */
+    border-radius: 10px; /* Curved edges for the dropdown box */
+}
+/* Optional: Adjust dropdown position if necessary */
+.nav-item.dropdown .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%); /* Centers the dropdown horizontally */
+}
+   
+  /* Styling for the form container */
+    .text-center a {
+        color: #505153;
+
+    }
+    .text-center a:hover {
+        text-decoration: underline;
+        color: #0e74db;
+    }
 
 
