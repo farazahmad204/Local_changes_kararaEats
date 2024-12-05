@@ -81,19 +81,33 @@
                 </li>
                 <!-- Show these links if the user is logged in -->
                 {% if user.username == 'fahm' %}
-                <li class="nav-item text-end">
-                    <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
+                 <!-- Dropdown Item -->
+                 <li class="nav-item dropdown text-start">
+                    <a class="nav-link dropdown-toggle custom-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle" style="font-size: 30px;"></i>&nbsp;&nbsp;{{user.username}}
+                    </a>
+           
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Profile</a></li>
+                        <li>
+                            <form method="POST" action="{% url 'logout' %}">
+                             {% csrf_token %}
+                            <button type="submit" class="dropdown-item logout-btn ">Logout</button>
+                            </form>
+                        </li>
+                </ul>
                 </li>
                 {% else %}
                  <!-- Dropdown Item -->
                 <li class="nav-item dropdown text-start">
                     <a class="nav-link dropdown-toggle custom-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user-circle" style="font-size: 30px;"></i>
+                    <i class="fas fa-user-circle" style="font-size: 30px;"></i>&nbsp;&nbsp;{{user.username}}
                     </a>
            
                 <!-- Dropdown Menu -->
                 <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Profile</a></li>
                         <li>
                             <form method="POST" action="{% url 'logout' %}">
                              {% csrf_token %}
@@ -161,8 +175,22 @@
                     </li>
                      <!-- Show these links if the user is logged in -->
                 {% if user.username == 'fahm' %}
-                <li class="nav-item text-end">
-                    <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
+                 <!-- Dropdown Item -->
+                 <li class="nav-item dropdown text-start">
+                    <a class="nav-link dropdown-toggle custom-font" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle" style="font-size: 30px;"></i>&nbsp;&nbsp;{{user.username}}
+                    </a>
+           
+                <!-- Dropdown Menu -->
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Profile</a></li>
+                        <li>
+                            <form method="POST" action="{% url 'logout' %}">
+                             {% csrf_token %}
+                            <button type="submit" class="dropdown-item logout-btn ">Logout</button>
+                            </form>
+                        </li>
+                </ul>
                 </li>
                 {% else %}
                  <!-- Dropdown Item -->
@@ -173,7 +201,7 @@
            
                 <!-- Dropdown Menu -->
                 <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                     <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Profile</a></li>
                         <li>
                             <form method="POST" action="{% url 'logout' %}">
                              {% csrf_token %}
