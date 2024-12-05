@@ -5,7 +5,8 @@ from .views import RegisterView, CustomLoginView
 from django.contrib.auth.views import LogoutView
 
 from django.contrib.auth import views as auth_views
-from .views import CustomPasswordResetDoneView,CustomPasswordResetView,CustomPasswordResetConfirmView,CustomPasswordResetCompleteView
+from .views import CustomPasswordResetDoneView,CustomPasswordResetView,CustomPasswordResetConfirmView,CustomPasswordResetCompleteView,edit_profile
+from . import views
 
 urlpatterns = [
     path('', CustomLoginView.as_view(), name='login'),
@@ -20,4 +21,8 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
+
+
+    path('profile/', views.edit_profile, name='profile'),
+    path('edit-profile/', views.edit_profile, name='edit_profile'),
 ]

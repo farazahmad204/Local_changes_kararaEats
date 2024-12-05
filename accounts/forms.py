@@ -14,6 +14,12 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'email','whatsapp_num', 'address']
 
+    
+    def __init__(self, *args, **kwargs):
+        # Set default value for whatsapp_num field (e.g., +61 for Australian numbers)
+        super().__init__(*args, **kwargs)
+        self.fields['whatsapp_num'].initial = '+61'  # Set the default country code
+
     def clean_whatsapp_num(self):
         whatsapp_num = self.cleaned_data.get('whatsapp_num')
 

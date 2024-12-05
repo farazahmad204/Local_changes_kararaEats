@@ -74,11 +74,15 @@
             
             {% if user.is_authenticated %}
              <!-- Show these links if the user is logged in -->
-             {% if user.username == 'fahm' %} 
-                <li class="nav-item text-end">
-                    <a class="nav-link custom-font" href="{% url 'display_menu' %}" >Admin</a>
-                </li>
-            {% endif %}
+             {% if user.username == 'fahm' %}
+             <li class="nav-item text-end">
+                 <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
+             </li>
+         {% else %}
+             <li class="nav-item text-end">
+                 <a class="nav-link custom-font" href="{% url 'edit_profile' %}"><i class="fas fa-user-circle" style="font-size: 30px;"></i></a>
+             </li>
+         {% endif %}
                 <li class="nav-item text-end">
                     <a id="menu" class="nav-link custom-font" href="{% url 'WeeklyMenu' %}" >Menu</a>
                 </li>
@@ -141,12 +145,15 @@
                
                 {% if user.is_authenticated %}
 
-                {% if user.username == 'fahm' %} 
+                {% if user.username == 'fahm' %}
                 <li class="nav-item text-end">
                     <a class="nav-link custom-font" href="{% url 'display_menu' %}">Admin</a>
                 </li>
-                {% endif %}
-
+            {% else %}
+                <li class="nav-item text-end">
+                    <a class="nav-link custom-font" href="{% url 'edit_profile' %}"><i class="fas fa-user-circle" style="font-size: 30px;"></i></a>
+                </li>
+            {% endif %}
                     <!-- Show these links if the user is logged in -->
                     <li class="nav-item">
                         <a class="nav-link custom-font " href="{% url 'WeeklyMenu' %}" >Menu</a>

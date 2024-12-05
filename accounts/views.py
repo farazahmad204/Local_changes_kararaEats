@@ -4,6 +4,8 @@ from django.contrib.auth import login
 from django.urls import reverse
 from django.contrib import messages
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 
 
 from django.contrib.auth.views import PasswordResetDoneView,PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
@@ -89,3 +91,15 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 
 
 
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')  # Redirect to the profile page
+    else:
+        form = CustomUserCreationForm(instance=request.user)
+    
+    return render(request, 'accounts/edit_profile.html', {'form': form})
