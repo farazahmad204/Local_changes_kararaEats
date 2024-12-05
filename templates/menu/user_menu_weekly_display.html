@@ -357,7 +357,7 @@
                         style="width: 50px; height: 80px; object-fit: cover; border-radius: 50%;">
                     <span> Login Required</span>
                 </h5>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"
                     aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -366,9 +366,9 @@
             <div class="modal-footer">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <button type="submit" class="logout-btn custom-font">Login</button>
+                    <button type="submit" class="layout-btn custom-font">Login</button>
                 </form>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -384,14 +384,14 @@
                     <i class="fas fa-shopping-cart cart-icon"></i>
                     <span>No Items Selected</span>
                 </h5>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"
                     aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <p class="custom-font">Please select at least one item to place an order.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -82,7 +82,7 @@
                     <img src="{% static 'images/user.svg' %}" alt="user icon" class="img-thumbnail mr-3"
                                     style="width: 50px; height: 80px; object-fit: cover; border-radius: 50%;">
                     <span> Login Required</span></h5>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"
                     aria-label="Close">X</button>
             </div>
             <div class="modal-body">
@@ -91,9 +91,9 @@
             <div class="modal-footer">
                 <form method="POST" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <button type="submit" class="logout-btn custom-font ">Login</button>
+                    <button type="submit" class="layout-btn custom-font ">Login</button>
                 </form>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"><label for="#loginModal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"><label for="#loginModal"
                         class="custom-font"></label>
                     Close</button>
             </div>
@@ -112,14 +112,14 @@
                     <i class="fas fa-shopping-cart cart-icon"></i>
                     <span>No Items Selected </span>
                 </h5>
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"
                     aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <p class="custom-font">Please select at least one item to place an order.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="logout-btn custom-font" data-bs-dismiss="modal"><label for="#noItemsModal"
+                <button type="button" class="layout-btn custom-font" data-bs-dismiss="modal"><label for="#noItemsModal"
                         class="custom-font"></label>
                     Close</button>
             </div>
@@ -137,7 +137,7 @@
             <div class="modal-header">
                 <h5 class="modal-title  animated fadeIn text-light" id="DeliveryModalLabel"><i class="fa-solid fa-car"></i>  Delivery
                     Option</h5>
-                    <button type="button" id="close" class="logout-btn custom-font" data-bs-dismiss="modal"
+                    <button type="button" id="close" class="layout-btn custom-font" data-bs-dismiss="modal"
                         aria-label="Close">X</button>
             </div>
 
@@ -165,10 +165,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" name="confirm_order" id="confirmBtn" class="logout-btn custom-font">Confirm
+                <button type="submit" name="confirm_order" id="confirmBtn" class="layout-btn custom-font">Confirm
                     Order</button>
 
-                    <button type="button" class="logout-btn custom-font" id="cancelBtn" data-bs-dismiss="modal"><label for="#DeliveryModal"
+                    <button type="button" class="layout-btn custom-font" id="cancelBtn" data-bs-dismiss="modal"><label for="#DeliveryModal"
                             class="custom-font"></label>
                         Close</button>
 
