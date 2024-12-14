@@ -52,7 +52,9 @@ INSTALLED_APPS = [
 
     'email_service',  # email_serivce app
     'database_view',
-    'whatsapp_manager'
+    'whatsapp_manager',
+
+    'cart',  # email_serivce app
     ]
 
 MIDDLEWARE = [
@@ -81,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart', #for cart
             ],
         },
     },
