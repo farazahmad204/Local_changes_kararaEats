@@ -281,7 +281,7 @@
     <!-- Main Content Area -->
     <div class="menu-content" style="flex: 1; padding: 20px; overflow-y: auto; background-color:none">
 
-        <form id="orderForm" method="post" action="{% url 'order_items' %}">
+        <form id="orderForm" method="post" action="{% url 'checkout_view' %}"> 
             {% csrf_token %}
 
             <div id="menuContent" class="mt-1">
@@ -293,7 +293,30 @@
                      <!-- Submit button -->
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary btn-lg shadow-lg" style="transition: background-color 0.3s;">
-                            <i class="fas fa-shopping-cart"></i> Order Selected Items
+                            <i class="fas fa-shopping-cart"></i> <div id="cart-qty-{{ menu.id }}" class="d-inline-flex">
+
+
+                                {% with qty_amount=cart|length %}
+    
+                                    
+                                    {% if qty_amount > 0 %}
+                                
+                                        {{ qty_amount }}
+    
+    
+                                        {% else %}
+    
+                                            0
+    
+    
+                                    {% endif %}
+    
+    
+    
+                                {% endwith %}
+    
+    
+                            </div> Order Selected Items
                         </button>
                     </div>
 
@@ -310,11 +333,17 @@
                                 <div class="item-quantity" style="margin-top: 10px;">
                                     <h5 style="color: darkblue; margin-top: 10px; text-align: start;">AU$ {{ item.price }}</h5>
                                     <!-- Quantity input -->
-                                    <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
-                                    <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}"
-                                           name="quantities_{{ menu.id }}_{{ item.id }}" min="0" max="10"
-                                           class="form-control item-quantity" value="0" placeholder="Qty"
-                                           style="width: 70px; display: inline-block; margin-top: 10px;">
+                                   
+
+                                           <form method="POST" id="add-to-cart-form" data-product-id="{{ item.id }}">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-primary btn-lg shadow-l" id="add-button_{{ menu.id }}_{{ item.id }}_{{ item.price }}">Add to Cart</button>
+                                            <span style="font-size: 1em; margin-right: 5px;">Quantity:</span>
+                                            <input type="number" id="quantities_{{ menu.id }}_{{ item.id }}_{{ item.price }}"
+                                                   name="quantities_{{ menu.id }}_{{ item.id }}_{{ item.price }}" min="0" max="10"
+                                                   class="form-control item-quantity" value="0" placeholder="Qty"
+                                                   style="width: 70px; display: inline-block; margin-top: 10px;">
+                                        </form>
                                 </div>
                             </div>
 
@@ -400,6 +429,71 @@
 
 
 <script>
+
+// Add button
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all buttons with ids starting with "add-button_"
+    const addButtons = document.querySelectorAll('[id^="add-button_"]');
+    
+    // Loop through each button and add an event listener
+    addButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Extract the values from the button's id
+            const idParts = button.id.split('_');
+            const menuId = idParts[1];
+            const itemId = idParts[2];
+            const itemPrice = idParts[3];
+            
+            // Get the quantity input associated with this button
+            // Escape the itemPrice to safely use it in querySelector
+            const escapedItemPrice = CSS.escape(itemPrice);
+            // Get the quantity input associated with this button (using escaped itemPrice)
+            const quantityInput = document.querySelector(`#quantities_${menuId}_${itemId}_${escapedItemPrice}`);
+            const quantity = quantityInput ? quantityInput.value : 0;
+            
+            // Log the extracted values (menuId, itemId, itemPrice, quantity)
+            console.log(`Item added to cart - Menu ID: ${menuId}, Item ID: ${itemId}, Price: ${itemPrice}, Quantity: ${quantity}`);
+            
+            // Call your function to add this item to the cart
+            addToCart(menuId, itemId , itemPrice, quantity);
+        });
+    });
+});
+    function addToCart(menuId, itemId, itemPrice, quantity) {
+         // Perform AJAX or other logic to add to cart
+            console.log(`Adding to cart: Item ID: ${itemId}, Quantity: ${quantity}`);
+            // Make the AJAX call
+    $.ajax({
+        type: 'POST',
+        url: '{% url "cart-add" %}',  // Django URL for adding to cart
+        data: {
+            menu_id: menuId,
+            item_id: itemId,
+            item_qty:quantity,
+            item_price:itemPrice,
+            csrfmiddlewaretoken: "{{ csrf_token }}",  // CSRF token for security
+            action: 'post'
+        },
+        success: function (json) {
+            // Update the cart quantity for the specific menu
+            const cartQtyElement = document.getElementById(`cart-qty-${menuId}`);
+            if (cartQtyElement) {
+                cartQtyElement.textContent = json.qty;
+            }
+            console.log(json);  // Optional: Check the response data in the console
+        },
+        error: function (xhr, errmsg, err) {
+            // Handle AJAX error
+            console.error("Error:", errmsg);
+        }
+    });
+
+
+        }
+
+
+
 
     document.getElementById('orderForm').addEventListener('submit', function (e) {
         var quantities = document.querySelectorAll('.item-quantity');
